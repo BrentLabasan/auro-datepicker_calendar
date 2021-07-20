@@ -5,4 +5,4 @@ import 'core-js/es/symbol';
 import 'whatwg-fetch';
 
 import '@webcomponents/webcomponentsjs/webcomponents-bundle';
-import './auro-datepicker_calendar';
+import './auro-datepicker-calendar';

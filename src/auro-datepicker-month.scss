@@ -1,0 +1,74 @@
+$height: 470px;
+
+:host {
+    // // css for debugging purposes
+    // border: 2px dotted orange;
+
+
+    // width: 100%;
+    // background-color: blue;
+    margin: 0 22px 0 0; // for round-trip view, 846 - (2 * 412)
+    padding: 42px 0 0 0;
+
+    width: 412px;
+    height: 470px;
+
+    // display: inline-block;
+    float: left;
+
+    // debugging
+    border: 3px dashed yellow;
+}
+
+.viewMode-single {
+    height: $height;
+}
+
+.viewMode-double {
+    height: $height;
+}
+
+
+
+button {
+    cursor: pointer;
+}
+
+
+
+#btn-nextMonth {
+    // float: right;
+}
+
+.dayInitials {
+    display: grid;
+    height: 50px;
+
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+
+    span {
+        display: flex;
+        align-items: center;
+
+        justify-content: center;
+        font-weight: 900;
+    }
+    // grid-template-columns: repeat(3, 1fr);
+    // gap: 10px;
+    // grid-auto-rows: minmax(100px, auto);
+    // div {
+    //     border: 1px solid green;
+    //     border-radius: 10px;
+    // }
+  }
+
+  .hidden {
+      visibility: hidden;
+  }
+
+  #monthNameYear {
+      text-align: center;
+      font-weight: 900;
+
+      font-size: 20px;
+  }

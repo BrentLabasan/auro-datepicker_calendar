@@ -1,0 +1,28 @@
+:host {
+    display: inline-block;
+
+    // background-color: blue;
+    // gap: 0 0;
+
+    width: 100%;
+
+    // // css for debugging purposes
+    // border: 3px dashed yellow;
+}
+
+.wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    // column-gap: 0;
+    // row-gap: 0;
+
+
+    // old shit
+    // grid-template-columns: repeat(3, 1fr);
+    // gap: 10px;
+    // grid-auto-rows: minmax(100px, auto);
+    // div {
+    //     border: 1px solid green;
+    //     border-radius: 10px;
+    // }
+  }

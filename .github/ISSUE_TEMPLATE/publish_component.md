@@ -1,7 +1,7 @@
 ---
 name: Publish Component
 about: Create a ticket to drive compliance before publishing a a new componet to Auro Design System
-title: 'auro-datepicker_calendar; publish to Auro Design System'
+title: 'auro-datepicker-calendar; publish to Auro Design System'
 labels: 'Status: Review Needed, not-reviewed'
 ---
 

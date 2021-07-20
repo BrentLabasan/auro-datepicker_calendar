@@ -1,5 +1,5 @@
 const fs = require('fs');
-const bundle = 'auro-datepicker_calendar__bundled.js';
+const bundle = 'auro-datepicker-calendar__bundled.js';
 const indexFile = './build/index.html';
 
 // File destination.txt will be created or overwritten by default.
@@ -23,7 +23,7 @@ fs.readFile(indexFile, 'utf8', function (err,data) {
     return console.log(err);
   }
 
-  const element = data.replace(`../src/auro-datepicker_calendar.js`, `auro-datepicker_calendar__bundled.js`);
+  const element = data.replace(`../src/auro-datepicker-calendar.js`, `auro-datepicker-calendar__bundled.js`);
 
   fs.writeFile(indexFile, element, 'utf8', function (err) {
      if (err) return console.log(err);

@@ -1,58 +1,51 @@
-# auro-datepicker_calendar
+### 💻 DESKTOP 📅 ONE WAY | include the attribute "isOneWay"
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam convallis in tellus nec pellentesque. Integer bibendum ligula sit amet vehicula gravida. Maecenas accumsan, ligula vitae molestie iaculis, tellus mi laoreet ex [install instructions](https://auro.alaskaair.com/components/auro/button/install), ac malesuada velit dolor vel mi. Cras et rutrum urna. Sed mattis mi eu tortor ullamcorper, egestas bibendum mauris cursus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus viverra eros eget neque commodo vulputate. In tempus eu velit at dictum.
+Depart date has NOT been set, so the depart date has been set to today's date.
+<br/>
+Depart date has been set.
 
-Nulla at augue facilisis `odio lobortis` molestie vitae a nulla.
 
-## auro-datepicker_calendar use cases
-
-The `auro-datepicker_calendar` element should be used in situations where users may:
-
-* egestas bibendum mauris cursus
-* quis euismod felis mollis
-* consectetur ipsum risus sed tortor
-
-> Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam fermentum libero ipsum, ac tempor sapien blandit in. Nam tincidunt non felis molestie varius.
-
-|convallis|tristique|nisl dignissim|eleifend|
-|---|---|---|---|
-|√|√|||
-|||√|√|
+<button>tabbable</button>
 
 <div class="exampleWrapper">
-  <auro-datepicker_calendar cssClass="testClass">Hello World!</auro-datepicker_calendar>
-  <auro-datepicker_calendar cssClass="testClass" fixed>Hello World!</auro-datepicker_calendar>
+  <!-- <div>
+    <auro-datepicker-calendar isOneWay>
+    </auro-datepicker-calendar>
+  </div> -->
+
+  <div departDate_year="2021" departDate_month="12" departDate_day="30">
+    <auro-datepicker-calendar isOneWay>
+    </auro-datepicker-calendar>
+  </div>
 </div>
 
-<auro-accordion lowProfile justifyRight>
-  <span slot="trigger">See code</span>
+<button>tabbable</button>
 
-  ```html
-  <auro-datepicker_calendar cssClass="testClass">Hello World!</auro-datepicker_calendar>
-  <auro-datepicker_calendar cssClass="testClass" fixed>Hello World!</auro-datepicker_calendar>
-  ```
+### 💻 DESKTOP 📅📅 ROUND-TRIP | omit the attribute "isOneWay"
 
-</auro-accordion>
+Depart date and return date have been set.
+<br/>
+If depart date is not set by user, depart date will automatically be set to today's date.
 
-## Then there is more
+<button>tabbable</button>
 
-Aenean at blandit lorem. Fusce imperdiet mi nec gravida maximus. Quisque nisl libero, condimentum in nisi a, imperdiet lacinia arcu.
+<div class="exampleWrapper">
+  <!-- <div>
+    <auro-datepicker-calendar departDate_year="2021" departDate_month="10" departDate_day="30" returnDate_year="2021" returnDate_month="7" returnDate_day="27">
+    </auro-datepicker-calendar>
+  </div> -->
 
-```javascript
-toggleDialog = (elName) => {
-  let dialog = document.querySelector(elName);
-  const html = document.querySelector('html');
+  <!-- <div>
+    <auro-datepicker-calendar>
+    </auro-datepicker-calendar>
+  </div> -->
+</div>
 
-  html.style.overflow = 'hidden';
-  dialog.removeAttribute("open");
-  dialog.setAttribute("open", true);
-}
+<button>tabbable</button>
 
-toggleDialogClose = (elName) => {
-  let dialog = document.querySelector(elName);
-  const html = document.querySelector('html');
+<!-- ------------------------------------------- -->
+<!-- ------------------------------------------- -->
+<!-- SEPARATION POINT BETWEEN DESKTOP AND MOBILE -->
+<!-- ------------------------------------------- -->
+<!-- ------------------------------------------- -->
 
-  html.style.overflow = '';
-  dialog.removeAttribute("open");
-}
-```

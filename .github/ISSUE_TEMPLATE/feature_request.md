@@ -1,7 +1,7 @@
 ---
 name: Feature request
 about: Suggest an idea for this project
-title: 'auro-datepicker_calendar: [feature summary]'
+title: 'auro-datepicker-calendar: [feature summary]'
 labels: 'Type: Feature, not-reviewed'
 assignees: blackfalcon
 ---

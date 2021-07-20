@@ -1,7 +1,7 @@
 ---
 name: Development Story
 about: Create a new user story to address the development process
-title: 'auro-datepicker_calendar; develop [feature]'
+title: 'auro-datepicker-calendar; develop [feature]'
 labels: 'Status: Proposal, not-reviewed'
 ---
 

@@ -1,0 +1,424 @@
+// Copyright (c) 2021 Alaska Airlines. All right reserved. Licensed under the Apache-2.0 license
+// See LICENSE in the project root for license information.
+
+// ---------------------------------------------------------------------
+
+// Import Auro tokens
+@import './../node_modules/@alaskaairux/design-tokens/dist/tokens/SCSSVariables';
+@import './../node_modules/@alaskaairux/design-tokens/dist/tokens/SassCustomProperties';
+@import './../node_modules/@alaskaairux/design-tokens/dist/tokens/SCSSVariableMap';
+
+@import './../node_modules/@alaskaairux/webcorestylesheets/dist/breakpoints';
+@import './../node_modules/@alaskaairux/webcorestylesheets/dist/core';
+
+@import './../node_modules/@alaskaairux/webcorestylesheets/dist/utilityClasses/displayProperties';
+
+$auro-inset-spacing-options: lg;
+$auro-inset-directions: '';
+
+@import './../node_modules/@alaskaairux/webcorestylesheets/dist/utilityMixins/insetUtility';
+
+// Support for auroElement styles
+// @import './node_modules/@alaskaairux/webcorestylesheets/dist/auroElement/auroElement';
+
+// @import './constants.js';
+
+$height: 470px;
+
+// TODO for desktop the width and height will be ...
+:host {
+  display: inline-block;
+
+  // doesn't do anything
+  // overflow: hidden;
+
+  background-color: rgba(255 255 255);
+
+  // // css for debugging purposes
+  // border: 5px dotted purple;
+}
+
+// for mobile, the width and height will be 100% of the viewport TODO this will require discussion with Dale about how auro-dropdown will behave in mobile
+:host([mobilelayout]) {
+  width: 100%;
+  height: 100%;
+}
+
+#btn-prevMonth {
+  position: absolute;
+
+  top: 42px;
+  left: 0;
+
+  border: 0;
+  background: none;
+
+  z-index: 99999;
+
+}
+
+#btn-nextMonth {
+  position: absolute;
+
+  top: 42px;
+  right: 0;
+
+  border: 0;
+  background: none;
+
+  z-index: 99999;
+}
+
+
+button {
+  cursor: pointer;
+
+  &:focus {
+    // for some reason this doesn't work for the Prev and Next arrows, but it did work in Day
+    // border: 2px inset blue;
+
+    // works
+    // box-shadow: inset 0 0 10px blue;
+    box-shadow: inset 0 0 5px blue;
+  }
+}
+
+#calendarContainer {
+
+  // will ultimately be the functionality of the auro-dropdown
+  // position: absolute;
+
+  overflow: hidden;
+  // width: 335px;
+
+  height: 470px;
+
+  box-sizing: border-box;
+
+
+  background-color: rgb(255 255 255);
+
+  position: relative;
+
+  // for debugging purposes
+  // border: 1px solid #dbdbdb;
+  // box-shadow: 0 .1px 5px 0, 0 5px 10px rgba(0 0 0);
+}
+
+.hidden {
+    display: none;
+}
+
+// TODO ROOT_CONTAINER_WIDTH_ONEWAY
+.viewMode-single {
+    width: 412px;
+    height: 470px;
+}
+
+// ROOT_CONTAINER_WIDTH_ROUNDTRIP
+.viewMode-double {
+    width: 846px;
+    height: 470px;
+}
+
+#containerScrolling {
+
+
+  left: -1px;
+  width: 4875px; // 375 * 13
+
+  // css for debugging purposes
+  // border: 4px dashed pink;
+  // TODO the height for this is 0...hmm
+}
+
+#verticalLineContainer {
+display: inline-flex;
+width: 1px;
+height: 100px;
+
+flex-direction: column;
+align-items: center; /* stretch | flex-start | flex-end | center | baseline | first baseline | last baseline | start | end | self-start | self-end + ... safe | unsafe; */
+
+justify-content: center; /* flex-start | flex-end | center | space-between | space-around | space-evenly | start | end | left | right ... + safe | unsafe; */
+
+margin: 0 30px;
+
+
+
+}
+
+#verticalLine {
+    background-color: rgb(240 128 128);
+}
+
+#containerVerticalLine {
+margin: 0 30px;
+}
+
+// looks like to be deleted
+// #monthNameAndArrows {
+//     display: flex; /* or inline-flex */
+//     flex-direction: row;
+//     align-items: center; /* stretch | flex-start | flex-end | center | baseline | first baseline | last baseline | start | end | self-start | self-end + ... safe | unsafe; */
+
+//     justify-content: space-between; /* flex-start | flex-end | center | space-between | space-around | space-evenly | start | end | left | right ... + safe | unsafe; */
+
+//     font-size: 20px;
+//     font-weight: 900;
+
+
+//     button {
+//         border: 0;
+//         background: none;
+//     }
+// }
+
+.mobile-monthNameAndYear {
+  // todo to check
+  width: 100%;
+
+  font-weight: 900;
+
+  text-align: center;
+
+
+
+  @include auro_breakpoint--sm {
+    // display: none;
+    display: inline-block;
+    width: 375px;
+  }
+
+}
+
+#mobile-footer {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  width: 100%;
+
+  height: 100px; // todo get exact
+  align-items: center;
+
+  justify-content: flex-end;
+
+  padding: 5px;
+
+  background-color:rgba(255 255 255);
+  // background-color: yellow;
+
+
+
+  // z-index: 9999999999;
+
+  text-align: right;
+
+}
+
+#mobile-footer2 {
+  position: absolute;
+  bottom: 0;
+
+  // background-color: yellow;
+
+}
+
+#gradient {
+  background-image: linear-gradient(to left, rgba(255 255 255), rgba(255 255 255));
+  background-repeat: repeat-x;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#parent {
+  position: relative;
+
+  // css for debugging purposes
+  overflow: hidden;
+
+  width: 100%;
+  height: 100%;
+  
+  // // css for debugging purposes
+  // border: 2px dotted blue;
+
+  header {
+    position: absolute;
+    z-index: 999999;
+    display: flex; /* or inline-flex */
+    width: 100%;
+
+    height: 86px;
+    flex-direction: row;
+    align-items: center; /* stretch | flex-start | flex-end | center | baseline | first baseline | last baseline | start | end | self-start | self-end + ... safe | unsafe; */
+
+    background-color: rgb(255 255 255);
+
+
+    // box-shadow: 0 .1px 5px rgba(0 0 0 .12), 0 5px 10px rgba(0 0 0 .1);
+    box-shadow: 0 .1px 5px rgba(0 0 0), 0 5px 10px rgba(0 0 0);
+
+    // justify-content: center; /* flex-start | flex-end | center | space-between | space-around | space-evenly | start | end | left | right ... + safe | unsafe; */
+
+
+    input {
+      width: 142px; // 137px
+    
+      border: 0;
+      // padding: 10px;
+      color: #222222;
+    
+      font-family: 'AS Circular',  sans-serif;
+      font-size: 16px;
+    
+      font-style: normal;
+    
+    
+      font-weight: 400;
+      line-height: 24px;
+    
+      
+    
+    
+      // debug
+      // border: 1px solid gtreen;
+    
+      :focus {
+        border: 1px solid gtreen;
+      }
+    }
+
+  }
+
+
+  
+  footer {
+    position: absolute;
+    z-index: 99999;
+
+    // display: block;
+
+    // background-color: rgb(255, 255, 0);
+
+
+    // background-image: linear-gradient(left, rgba(255 255 0 1), rgba(255 255 0 0));
+    // background-repeat: repeat-x;
+
+    // background-image: -moz-linear-gradient(left, rgba(255 255 255 1), rgba(255 255 255 0));
+    // background-image: -ms-linear-gradient(left, rgba(255 255 255 1), rgba(255 255 255 0));
+    
+    // background-image: -webkit-gradient(linear, 0 0, 100% 0, from(rgba(255 255 255 1) 55%), to(rgba(255 255 255 0)));
+    // background-image: -webkit-linear-gradient(0deg, rgba(255 255 255 1) 55%, rgba(255 255 255 0));
+    // background-image: -o-linear-gradient(0deg, rgba(255 255 255 1) 55%, rgba(255 255 255 0));
+    bottom: 0px;
+    width: 100%;
+    height: 155px;
+    // background-image: linear-gradient(0deg, rgba(255 255 255 1) 55%, rgba(255 255 255 0));
+    background-image: linear-gradient(0deg, rgba(255 255 255) 55%, rgba(255 255 255));
+
+    background-repeat: repeat-y;
+
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='rgba(255, 255, 255, 1)', endColorstr='rgba(255, 255, 255, 0)', GradientType=1);
+
+
+
+    // display: flex;
+    // align-items: center;
+    // justify-content: flex-end;
+
+  }
+
+
+}
+
+#textContainer {
+  position: absolute;
+  overflow: scroll;
+
+  width: 100%;
+  height: 100%;
+  padding-left: 30px;
+}
+
+#container-button {
+  // margin: 0 20px 0 0;
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+
+  width: 140px;
+
+
+}
+
+#blahblah1 {
+  color: #9FABBB;
+
+  font-family: 'AS Circular', sans-serif;
+  font-size: 12px;
+
+  font-style: normal;
+
+  font-weight: 400;
+  line-height: 16px;
+  /* identical to box height, or 133% */
+
+
+  /* Text/Secondary on dark */
+
+}
+
+#blahblah2 {
+  font-family: 'AS Circular', sans-serif;
+  font-size: 16px;
+
+
+  font-weight: 400;
+  line-height: 24px;
+}
+
+#containerBackButton {
+  display: inline-flex; /* or inline-flex */
+
+  width: 80px;
+  height: 100%;
+  flex-direction: row;
+  align-items: center; /* stretch | flex-start | flex-end | center | baseline | first baseline | last baseline | start | end | self-start | self-end + ... safe | unsafe; */
+  justify-content: center; /* flex-start | flex-end | center | space-between | space-around | space-evenly | start | end | left | right ... + safe | unsafe; */
+
+  border-right: 1px solid rgb(0 0 0);
+
+
+}
+
+#containerDateInfo {
+  padding: 0 0 0 20px;
+}
+
+#btnGoBack_circle {
+  display: flex; /* or inline-flex */
+
+  width: 40px;
+  height: 40px;
+  flex-direction: row;
+  align-items: center; /* stretch | flex-start | flex-end | center | baseline | first baseline | last baseline | start | end | self-start | self-end + ... safe | unsafe; */
+
+  justify-content: center; /* flex-start | flex-end | center | space-between | space-around | space-evenly | start | end | left | right ... + safe | unsafe; */
+
+  border: 1px solid rgb(0 0 0);
+  border-radius: 40px;
+
+  font-size: 20px;
+}

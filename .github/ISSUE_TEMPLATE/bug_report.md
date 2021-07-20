@@ -1,7 +1,7 @@
 ---
 name: Bug report
 about: Create a report to help us improve
-title: 'auro-datepicker_calendar: [issue summary]'
+title: 'auro-datepicker-calendar: [issue summary]'
 labels: 'Type: Bug, not-reviewed'
 assignees: blackfalcon
 ---

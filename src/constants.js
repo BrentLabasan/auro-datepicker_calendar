@@ -1,0 +1,11 @@
+const AMOUNT_MONTHS_SHOWN = 11;
+
+export const ROOT_CONTAINER_WIDTH_ONEWAY = 412;
+export const ROOT_CONTAINER_WIDTH_ROUNDTRIP = 846;
+export const ROOT_CONTAINER_HEIGHT = 470;
+
+export const MONTH_WIDTH = 412;
+
+export const MONTH_MARGIN_RIGHT = 22;
+
+export default AMOUNT_MONTHS_SHOWN;
