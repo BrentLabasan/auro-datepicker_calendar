@@ -1,0 +1,98 @@
+$height: 470px;
+
+:host {
+    display: inline-block;
+    border: 1px dotted red;
+}
+
+#departureArrivalDatesDisplay {
+    // border: 1px solid grey;
+    cursor: pointer;
+
+    background: #ffffff;
+    /* Border/Disabled */
+
+    border: 1px solid #dbdbdb;
+    box-sizing: border-box;
+    /* drop shadow 1 */
+
+    box-shadow: 0px 0.1px 5px rgba(0, 0, 0, 0.12), 0px 5px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+#calendarContainer {
+    // debug
+    // border: 2px dashed purple;
+
+    // will ultimately be the functionality of the auro-dropdown
+    position: absolute;
+    border: 1px solid #dbdbdb;
+    box-sizing: border-box;
+    box-shadow: 0px 0.1px 5px rgba(0, 0, 0, 0.12), 0px 5px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    background-color: white;
+
+    width: 750px;
+
+    overflow: hidden;
+}
+
+.hidden {
+    display: none;
+}
+
+.viewMode-single {
+    width: 412px;
+    height: $height;
+}
+
+.viewMode-double {
+    // width: 824px;
+    width: 4500px; // 375 * 12
+    height: $height;
+}
+
+#containerScrolling {
+    position: absolute;
+    left: -1px;
+    width: 4875px; // 375 * 13
+}
+
+#verticalLineContainer {
+display: inline-flex;
+flex-direction: column;
+justify-content: center; /* flex-start | flex-end | center | space-between | space-around | space-evenly | start | end | left | right ... + safe | unsafe; */
+align-items: center; /* stretch | flex-start | flex-end | center | baseline | first baseline | last baseline | start | end | self-start | self-end + ... safe | unsafe; */
+width: 1px;
+height: 100px;
+margin: 0 30px;
+
+#verticalLine {
+    background-color: lightcoral;
+}
+
+}
+
+#containerVerticalLine {
+margin: 0 30px;
+}
+
+#monthNameAndArrows {
+    display: flex; /* or inline-flex */
+    flex-direction: row;
+    justify-content: space-between; /* flex-start | flex-end | center | space-between | space-around | space-evenly | start | end | left | right ... + safe | unsafe; */
+    align-items: center; /* stretch | flex-start | flex-end | center | baseline | first baseline | last baseline | start | end | self-start | self-end + ... safe | unsafe; */
+    font-size: 20px;
+    font-weight: bold;
+    height: 50px;
+
+
+    button {
+        border: 0;
+        background: none;
+    }
+}
+
+button {
+    cursor: pointer;
+}

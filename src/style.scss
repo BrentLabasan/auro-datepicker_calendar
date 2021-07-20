@@ -4,41 +4,49 @@
 // ---------------------------------------------------------------------
 
 // Import Auro tokens
-@import './../node_modules/@alaskaairux/design-tokens/dist/tokens/SCSSVariables';
-@import './../node_modules/@alaskaairux/design-tokens/dist/tokens/SassCustomProperties';
+@import "./node_modules/@alaskaairux/design-tokens/dist/tokens/SCSSVariables";
+@import "./node_modules/@alaskaairux/design-tokens/dist/tokens/SassCustomProperties";
+@import "./node_modules/@alaskaairux/design-tokens/dist/tokens/SCSSVariableMap";
 
-@import './../node_modules/@alaskaairux/webcorestylesheets/dist/breakpoints';
-@import './../node_modules/@alaskaairux/webcorestylesheets/dist/core';
+@import "./node_modules/@alaskaairux/webcorestylesheets/dist/breakpoints";
+@import "./node_modules/@alaskaairux/webcorestylesheets/dist/core";
 
-// Support for auroElement styles
-// @import './node_modules/@alaskaairux/webcorestylesheets/dist/auroElement/auroElement';
+@import "./node_modules/@alaskaairux/webcorestylesheets/dist/utilityClasses/displayProperties";
 
-// container styles - defines the look of the outer custom component
-// :host {
-//   ...
-// }
+$auro-inset-spacing-options: lg;
+$auro-inset-directions:'';
+@import "./node_modules/@alaskaairux/webcorestylesheets/dist/utilityMixins/insetUtility";
 
+::slotted(*:hover) {
+  cursor: pointer;
+}
 
-// Selector is for initial setup only
-// delete when building new custom element
-.testClass {
+:host {
+  cursor: pointer;
+}
+
+.popover {
+  border-radius: var(--auro-border-radius);
+  border: 1px solid #F7F7F7;
+  background-color: var(--auro-color-background-lightest);
+  color: var(--auro-color-text-primary-on-light);
+  padding: var(--auro-size-xs) 0;
+
+  font-size: var(--auro-text-body-size-default);
+
+  box-shadow: 0 0.1px 5px 0 rgba(0, 0, 0, 0.12),
+    0 5px 10px 0 rgba(0, 0, 0, 0.1);
+
   display: inline-block;
-  padding: var(--auro-text-body-size-default);
-  border: 1px solid var(--auro-color-border-error-on-light);
-  color:  var(--auro-color-border-error-on-light);
-}
 
-// Selector for native :focus-visible support
-:focus-visible {
-  background-color: var(--auro-color-border-error-on-light);
-  color: var(--auro-color-base-white);
-}
-
-// Selector for focus-visible polyfill
-:host(.focus-visible) {
-  // requires reference to custom element selector in this example
-  .testClass {
-    background-color: var(--auro-color-border-error-on-light);
-    color: var(--auro-color-base-white);
+  &:not([data-show]){
+    @extend .util_displayHiddenVisually;
   }
+
+  &[data-show] {
+    z-index: var(--auro-depth-tooltip);
+    background-color: var(--auro-color-background-lightest);
+  }
+
 }
+ 

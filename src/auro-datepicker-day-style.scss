@@ -1,0 +1,170 @@
+// Copyright (c) 2021 Alaska Airlines. All right reserved. Licensed under the Apache-2.0 license
+// See LICENSE in the project root for license information.
+
+// ---------------------------------------------------------------------
+
+// Import Auro tokens
+@import "./node_modules/@alaskaairux/design-tokens/dist/tokens/SCSSVariables";
+@import "./node_modules/@alaskaairux/design-tokens/dist/tokens/SassCustomProperties";
+@import "./node_modules/@alaskaairux/design-tokens/dist/tokens/SCSSVariableMap";
+
+@import "./node_modules/@alaskaairux/webcorestylesheets/dist/breakpoints";
+@import "./node_modules/@alaskaairux/webcorestylesheets/dist/core";
+
+@import "./node_modules/@alaskaairux/webcorestylesheets/dist/utilityClasses/displayProperties";
+
+$auro-inset-spacing-options: lg;
+$auro-inset-directions:'';
+@import "./node_modules/@alaskaairux/webcorestylesheets/dist/utilityMixins/insetUtility";
+
+$zIndexText: 99999999999;
+
+:host {
+    // debug
+    // border: 1px solid blue;
+
+    // border: 1px dotted green;
+
+    cursor: pointer;
+
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    width: 45px;
+    height: 60px;
+
+
+    // border-radius: 44px;
+
+
+}
+
+// :host([isRangeStart]) {
+//     background-color: #01426A;
+//     color: white;   
+// }
+
+// :host([isRangeEnd]) {
+//         border: 1px solid #00274A;
+//     background-color: white;
+//     // color: white;
+// }
+
+.rangeStartPill {
+    position: absolute;
+
+    width: 45px;
+    height: 60px;
+    z-index: 9999999;
+
+    left: 0;
+    top: 0;
+
+    background-color: #01426A;
+    border-radius: 44px;
+}
+
+.rangeEndPill {
+    position: absolute;
+
+    width: 45px;
+    height: 60px;
+    z-index: 9999998;
+
+    left: 0;
+    top: 0;
+
+    background-color: #F9FBFC;
+    border-radius: 44px;
+    border: 1px solid #00274A;
+}
+
+#dayDigit {
+    display: inline;
+    font-size: 18px;
+    align-self: center;
+    z-index: $zIndexText;
+
+}
+
+#dayPrice {
+    font-size: 12px;
+    align-self: center;
+    z-index: $zIndexText;
+
+}
+
+.dayContainer {
+    // display: inline-block;
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    width: 45px;
+    height: 60px;
+    position: relative;
+}
+
+.selected {
+    position: absolute;
+    background-color: #01426A;
+    border-radius: 44px;
+    width: 45px;
+    height: 60px;
+    display: inline-block;
+    z-index: 9999;
+
+    left: 0;
+    top: 0;
+}
+
+.inbetween {
+    position: absolute;
+
+    width: 45px;
+    height: 52px;
+    z-index: 9999;
+
+    left: 0;
+    top: 4px;
+
+    display: grid;
+    grid-template-columns: auto auto;
+
+    div {
+        // debug
+        background-color: orange;
+
+        // background-color: #F7F7F7;
+        color: #222222;
+    }
+
+    .leftSideRounded {
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+    }
+
+    .rightSideRounded {
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
+    }
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.whiteText {
+  color: white;
+}
+
+.disabled {
+    // background-color: yellow;
+
+    pointer-events: none; // wtf, this isn't working. But it should be handled by the JS anyway.
+
+    color: #9FABBB;
+}

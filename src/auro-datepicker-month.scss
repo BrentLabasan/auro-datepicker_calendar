@@ -1,0 +1,60 @@
+$height: 470px;
+
+:host {
+    // debug
+    // border: 2px dotted orange;
+
+    display: inline-block;
+    // width: 100%;
+    // background-color: blue;
+    margin: 0 60px 0 0;
+}
+
+.viewMode-single {
+    // width: 412px;
+    width: 100%;
+    height: $height;
+}
+
+.viewMode-double {
+    // width: 824px;
+
+    // width: 50%; // this actually messes up the layout
+    height: $height;
+}
+
+
+
+button {
+    cursor: pointer;
+}
+
+
+
+#btn-nextMonth {
+    // float: right;
+}
+
+.dayInitials {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr ;
+    height: 50px;
+
+    span {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: bold;
+    }
+    // grid-template-columns: repeat(3, 1fr);
+    // gap: 10px;
+    // grid-auto-rows: minmax(100px, auto);
+    // div {
+    //     border: 1px solid green;
+    //     border-radius: 10px;
+    // }
+  }
+
+  .hidden {
+      visibility: hidden;
+  }

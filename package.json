@@ -17,8 +17,9 @@
   "main": "index.js",
   "license": "Apache-2.0",
   "dependencies": {
+    "chalk": "^4.1.1",
     "lit-element": "^2.5.1",
-    "chalk": "^4.1.1"
+    "luxon": "^2.0.1"
   },
   "peerDependencies": {
     "@alaskaairux/design-tokens": "^3.3.0",
