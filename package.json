@@ -17,6 +17,7 @@
   "main": "index.js",
   "license": "Apache-2.0",
   "dependencies": {
+    "@alaskaairux/icons": "^4.8.1",
     "chalk": "^4.1.1",
     "lit-element": "^2.5.1",
     "luxon": "^2.0.1"
