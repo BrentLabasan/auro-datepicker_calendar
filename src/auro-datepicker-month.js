@@ -24,7 +24,9 @@ export default class AuroDatePickerMonth extends LitElement {
   }
 
   static get styles() {
-    return css`${styleCss}`;
+    return [
+      styleCss,
+    ];
   }
   
 

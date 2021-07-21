@@ -59,7 +59,9 @@ export default class AuroDatePickerCalendar extends LitElement {
       }
 
   static get styles() {
-    return css`${styleCss}`;
+    return [
+      styleCss,
+    ];
   }
 
   static get properties() {

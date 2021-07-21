@@ -21,7 +21,9 @@ export default class AuroDatePickerWeek extends LitElement {
   }
 
   static get styles() {
-    return css`${styleCss}`;
+    return [
+      styleCss,
+    ];
   }
 
   // function to define props used within the scope of this component

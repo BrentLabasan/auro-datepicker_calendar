@@ -26,7 +26,9 @@ export default class AuroDatePickerDay extends LitElement {
   }
 
   static get styles() {
-    return css`${styleCss}`;
+    return [
+      styleCss,
+    ];
   }
 
   static get properties() {
