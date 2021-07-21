@@ -77,12 +77,12 @@ export default class AuroDatePickerCalendar extends LitElement {
       selectedDepartureDateTime: { type: DateTime, reflect: true },
       selectedArrivalDateTime: { type: DateTime, reflect: true },
 
-      rangeStart_month: {type: Number},
-      rangeStart_day: {type: Number},
-      rangeStart_year: {type: Number},
-      rangeEnd_month: {type: Number},
-      rangeEnd_day: {type: Number},
-      rangeEnd_year: {type: Number},
+      departDate_month: {type: Number},
+      departDate_day: {type: Number},
+      departDate_year: {type: Number},
+      returnDate_month: {type: Number},
+      returnDate_day: {type: Number},
+      returnDate_year: {type: Number},
 
       isSelectionModeFromDate: { type: Boolean },
       isViewSingleMode: { type: Boolean, reflect: true },
@@ -108,13 +108,13 @@ export default class AuroDatePickerCalendar extends LitElement {
       console.log("displayMonth", this.displayMonth);
       this.displayYear = dt.year;
 
-      this.rangeStart_year = dt.year;
-      this.rangeStart_month = dt.month;
-      this.rangeStart_day = dt.day;
+      this.departDate_year = dt.year;
+      this.departDate_month = dt.month;
+      this.departDate_day = dt.day;
 
-      this.rangeEnd_year = dt.year;
-      this.rangeEnd_month = dt.month;
-      this.rangeEnd_day = dt.day;
+      this.returnDate_year = dt.year;
+      this.returnDate_month = dt.month;
+      this.returnDate_day = dt.day;
 
       // debugger;
     }
@@ -154,7 +154,7 @@ export default class AuroDatePickerCalendar extends LitElement {
         this.selectedDepartureDateTime = data.detail.dateTime;
 
         const pendingRangeStart = DateTime.fromObject(genLuxonObj(data.detail.year, data.detail.month, data.detail.day));
-        const currentRangeEnd = DateTime.fromObject(genLuxonObj(this.rangeEnd_year, this.rangeEnd_month, this.rangeEnd_day));
+        const currentRangeEnd = DateTime.fromObject(genLuxonObj(this.returnDate_year, this.returnDate_month, this.returnDate_day));
         
         // debugger;
         
@@ -165,9 +165,9 @@ export default class AuroDatePickerCalendar extends LitElement {
 
         // debugger;
 
-        this.rangeStart_year = data.detail.year;
-        this.rangeStart_month = data.detail.month;
-        this.rangeStart_day = data.detail.day;
+        this.departDate_year = data.detail.year;
+        this.departDate_month = data.detail.month;
+        this.departDate_day = data.detail.day;
 
 
         // todo rainy day, I totally messed up what I was trying to do. this is rainy day code
@@ -178,7 +178,7 @@ export default class AuroDatePickerCalendar extends LitElement {
         this.selectedArrivalDateTime = data.detail.dateTime;
 
         const pendingRangeEnd = DateTime.fromObject(genLuxonObj(data.detail.year, data.detail.month, data.detail.day));
-        const currentRangeStart = DateTime.fromObject(genLuxonObj(this.rangeStart_year, this.rangeStart_month, this.rangeStart_day));
+        const currentRangeStart = DateTime.fromObject(genLuxonObj(this.departDate_year, this.departDate_month, this.departDate_day));
 
         if ( currentRangeStart && comesBefore(pendingRangeEnd, currentRangeStart) ) { // pending departure date selection comes after the current arival date
           alert("pending end date CAN NOT be before current begin date");
@@ -188,9 +188,9 @@ export default class AuroDatePickerCalendar extends LitElement {
         //   return false;
         // }
 
-        this.rangeEnd_year = data.detail.year;
-        this.rangeEnd_month = data.detail.month;
-        this.rangeEnd_day = data.detail.day;
+        this.returnDate_year = data.detail.year;
+        this.returnDate_month = data.detail.month;
+        this.returnDate_day = data.detail.day;
       }
 
       this.isSelectionModeFromDate = !this.isSelectionModeFromDate;
@@ -298,12 +298,12 @@ export default class AuroDatePickerCalendar extends LitElement {
       templates.push(html`
         <auro-datepicker-month
         offset="${i}"
-        rangeStart_year="${this.rangeStart_year}"
-        rangeStart_month="${this.rangeStart_month}"
-        rangeStart_day="${this.rangeStart_day}"
-        rangeEnd_year="${this.rangeEnd_year}"
-        rangeEnd_month="${this.rangeEnd_month}"
-        rangeEnd_day="${this.rangeEnd_day}"
+        departDate_year="${this.departDate_year}"
+        departDate_month="${this.departDate_month}"
+        departDate_day="${this.departDate_day}"
+        returnDate_year="${this.returnDate_year}"
+        returnDate_month="${this.returnDate_month}"
+        returnDate_day="${this.returnDate_day}"
 
         displayMonth="${DateTime.fromObject({ month: this.displayMonth, year: this.displayYear }).plus({ month: i }).toFormat('MM')}"
         displayYear="${DateTime.fromObject({ month: this.displayMonth, year: this.displayYear }).plus({ month: i }).year}">
@@ -420,11 +420,11 @@ export default class AuroDatePickerCalendar extends LitElement {
           <div id="departureArrivalDatesDisplay" @click="${this.handleDatesDisplayClick}">
 
 
-            ${ DateTime.fromObject({ year: this.rangeStart_year, month: this.rangeStart_month, day: this.rangeStart_day }).toFormat('LL/dd/yyyy')  }
+            ${ DateTime.fromObject({ year: this.departDate_year, month: this.departDate_month, day: this.departDate_day }).toFormat('LL/dd/yyyy')  }
 
             ||
 
-            ${ DateTime.fromObject({ year: this.rangeEnd_year, month: this.rangeEnd_month, day: this.rangeEnd_day }).toFormat('LL/dd/yyyy')  }
+            ${ DateTime.fromObject({ year: this.returnDate_year, month: this.returnDate_month, day: this.returnDate_day }).toFormat('LL/dd/yyyy')  }
 
 
         

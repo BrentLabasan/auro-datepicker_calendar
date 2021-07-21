@@ -36,12 +36,12 @@ export default class AuroDatePickerWeek extends LitElement {
       firstDayOfWeek_month: { type: Number },
       firstDayOfWeek_day: { type: Number },
 
-      rangeStart_month: {type: Number},
-      rangeStart_day: {type: Number},
-      rangeStart_year: {type: Number},
-      rangeEnd_month: {type: Number},
-      rangeEnd_day: {type: Number},
-      rangeEnd_year: {type: Number},
+      departDate_month: {type: Number},
+      departDate_day: {type: Number},
+      departDate_year: {type: Number},
+      returnDate_month: {type: Number},
+      returnDate_day: {type: Number},
+      returnDate_year: {type: Number},
 
       displayMonth: { type: Number },
 
@@ -81,8 +81,8 @@ export default class AuroDatePickerWeek extends LitElement {
       //   // 'alertIcon': this.error
       // };
       
-const isoRangeStart = DateTime.fromObject({year: this.rangeStart_year, month: this.rangeStart_month, day: this.rangeStart_day }).toISO();
-const isoRangeEnd = DateTime.fromObject({year: this.rangeEnd_year, month: this.rangeEnd_month, day: this.rangeEnd_day }).toISO();
+const isoRangeStart = DateTime.fromObject({year: this.departDate_year, month: this.departDate_month, day: this.departDate_day }).toISO();
+const isoRangeEnd = DateTime.fromObject({year: this.returnDate_year, month: this.returnDate_month, day: this.returnDate_day }).toISO();
 
 
 // debugger;
@@ -93,7 +93,7 @@ const isoRangeEnd = DateTime.fromObject({year: this.rangeEnd_year, month: this.r
   displayMonth="${this.displayMonth}"
           
           ?isInRange="${
-DateTime.fromObject({year: this.rangeStart_year, month: this.rangeStart_month, day: this.rangeStart_day }).toISO()
+DateTime.fromObject({year: this.departDate_year, month: this.departDate_month, day: this.departDate_day }).toISO()
 
 
           }"

@@ -46,12 +46,12 @@ export default class AuroDatePickerMonth extends LitElement {
       displayMonth: { type: Number },
       displayYear: { type: Number },
 
-      rangeStart_month: {type: Number},
-      rangeStart_day: {type: Number},
-      rangeStart_year: {type: Number},
-      rangeEnd_month: {type: Number},
-      rangeEnd_day: {type: Number},
-      rangeEnd_year: {type: Number},
+      departDate_month: {type: Number},
+      departDate_day: {type: Number},
+      departDate_year: {type: Number},
+      returnDate_month: {type: Number},
+      returnDate_day: {type: Number},
+      returnDate_year: {type: Number},
     };
   }
 
@@ -148,12 +148,12 @@ const containerCasses = {
             firstDayOfWeek_month="${DateTime.fromISO(firstSunday).month}"
             firstDayOfWeek_day="${DateTime.fromISO(firstSunday).day}"
 
-            rangeStart_year="${this.rangeStart_year}"
-              rangeStart_month="${this.rangeStart_month}"
-              rangeStart_day="${this.rangeStart_day}"
-              rangeEnd_year="${this.rangeEnd_year}"
-              rangeEnd_month="${this.rangeEnd_month}"
-              rangeEnd_day="${this.rangeEnd_day}"
+            departDate_year="${this.departDate_year}"
+              departDate_month="${this.departDate_month}"
+              departDate_day="${this.departDate_day}"
+              returnDate_year="${this.returnDate_year}"
+              returnDate_month="${this.returnDate_month}"
+              returnDate_day="${this.returnDate_day}"
             
             firstDayOfWeekDateTime="${firstSunday}">
             </auro-datepicker-week>
@@ -167,12 +167,12 @@ const containerCasses = {
             firstDayOfWeek_month="${DateTime.fromISO(firstSunday).plus({ week: 1 }).month}"
             firstDayOfWeek_day="${DateTime.fromISO(firstSunday).plus({ week: 1 }).day}"
 
-            rangeStart_year="${this.rangeStart_year}"
-              rangeStart_month="${this.rangeStart_month}"
-              rangeStart_day="${this.rangeStart_day}"
-              rangeEnd_year="${this.rangeEnd_year}"
-              rangeEnd_month="${this.rangeEnd_month}"
-              rangeEnd_day="${this.rangeEnd_day}"
+            departDate_year="${this.departDate_year}"
+              departDate_month="${this.departDate_month}"
+              departDate_day="${this.departDate_day}"
+              returnDate_year="${this.returnDate_year}"
+              returnDate_month="${this.returnDate_month}"
+              returnDate_day="${this.returnDate_day}"
             
             firstDayOfWeekDateTime="${DateTime.fromISO(firstSunday).plus({ week: 1 })}">
             </auro-datepicker-week>
@@ -186,12 +186,12 @@ const containerCasses = {
             firstDayOfWeek_month="${DateTime.fromISO(firstSunday).plus({ week: 2 }).month}"
             firstDayOfWeek_day="${DateTime.fromISO(firstSunday).plus({ week: 2 }).day}"
 
-            rangeStart_year="${this.rangeStart_year}"
-              rangeStart_month="${this.rangeStart_month}"
-              rangeStart_day="${this.rangeStart_day}"
-              rangeEnd_year="${this.rangeEnd_year}"
-              rangeEnd_month="${this.rangeEnd_month}"
-              rangeEnd_day="${this.rangeEnd_day}"
+            departDate_year="${this.departDate_year}"
+              departDate_month="${this.departDate_month}"
+              departDate_day="${this.departDate_day}"
+              returnDate_year="${this.returnDate_year}"
+              returnDate_month="${this.returnDate_month}"
+              returnDate_day="${this.returnDate_day}"
             
             firstDayOfWeekDateTime="${DateTime.fromISO(firstSunday).plus({ week: 2 })}">
             </auro-datepicker-week>
@@ -205,12 +205,12 @@ const containerCasses = {
             firstDayOfWeek_month="${DateTime.fromISO(firstSunday).plus({ week: 3 }).month}"
             firstDayOfWeek_day="${DateTime.fromISO(firstSunday).plus({ week: 3 }).day}"
 
-            rangeStart_year="${this.rangeStart_year}"
-              rangeStart_month="${this.rangeStart_month}"
-              rangeStart_day="${this.rangeStart_day}"
-              rangeEnd_year="${this.rangeEnd_year}"
-              rangeEnd_month="${this.rangeEnd_month}"
-              rangeEnd_day="${this.rangeEnd_day}"
+            departDate_year="${this.departDate_year}"
+              departDate_month="${this.departDate_month}"
+              departDate_day="${this.departDate_day}"
+              returnDate_year="${this.returnDate_year}"
+              returnDate_month="${this.returnDate_month}"
+              returnDate_day="${this.returnDate_day}"
             
             firstDayOfWeekDateTime="${DateTime.fromISO(firstSunday).plus({ week: 3 })}">
             </auro-datepicker-week>
@@ -224,12 +224,12 @@ const containerCasses = {
             firstDayOfWeek_month="${DateTime.fromISO(firstSunday).plus({ week: 4 }).month}"
             firstDayOfWeek_day="${DateTime.fromISO(firstSunday).plus({ week: 4 }).day}"
 
-            rangeStart_year="${this.rangeStart_year}"
-              rangeStart_month="${this.rangeStart_month}"
-              rangeStart_day="${this.rangeStart_day}"
-              rangeEnd_year="${this.rangeEnd_year}"
-              rangeEnd_month="${this.rangeEnd_month}"
-              rangeEnd_day="${this.rangeEnd_day}"
+            departDate_year="${this.departDate_year}"
+              departDate_month="${this.departDate_month}"
+              departDate_day="${this.departDate_day}"
+              returnDate_year="${this.returnDate_year}"
+              returnDate_month="${this.returnDate_month}"
+              returnDate_day="${this.returnDate_day}"
             
             firstDayOfWeekDateTime="${DateTime.fromISO(firstSunday).plus({ week: 4 })}">
             </auro-datepicker-week>
@@ -243,12 +243,12 @@ const containerCasses = {
             firstDayOfWeek_month="${DateTime.fromISO(firstSunday).plus({ week: 5 }).month}"
             firstDayOfWeek_day="${DateTime.fromISO(firstSunday).plus({ week: 5 }).day}"
 
-            rangeStart_year="${this.rangeStart_year}"
-              rangeStart_month="${this.rangeStart_month}"
-              rangeStart_day="${this.rangeStart_day}"
-              rangeEnd_year="${this.rangeEnd_year}"
-              rangeEnd_month="${this.rangeEnd_month}"
-              rangeEnd_day="${this.rangeEnd_day}"
+            departDate_year="${this.departDate_year}"
+              departDate_month="${this.departDate_month}"
+              departDate_day="${this.departDate_day}"
+              returnDate_year="${this.returnDate_year}"
+              returnDate_month="${this.returnDate_month}"
+              returnDate_day="${this.returnDate_day}"
             
             firstDayOfWeekDateTime="${DateTime.fromISO(firstSunday).plus({ week: 5 })}">
             </auro-datepicker-week>
@@ -263,12 +263,12 @@ const containerCasses = {
             firstDayOfWeek_month="${DateTime.fromISO(firstSunday).plus({ week: 6 }).month}"
             firstDayOfWeek_day="${DateTime.fromISO(firstSunday).plus({ week: 6 }).day}"
 
-            rangeStart_year="${this.rangeStart_year}"
-              rangeStart_month="${this.rangeStart_month}"
-              rangeStart_day="${this.rangeStart_day}"
-              rangeEnd_year="${this.rangeEnd_year}"
-              rangeEnd_month="${this.rangeEnd_month}"
-              rangeEnd_day="${this.rangeEnd_day}"
+            departDate_year="${this.departDate_year}"
+              departDate_month="${this.departDate_month}"
+              departDate_day="${this.departDate_day}"
+              returnDate_year="${this.returnDate_year}"
+              returnDate_month="${this.returnDate_month}"
+              returnDate_day="${this.returnDate_day}"
             
             firstDayOfWeekDateTime="${DateTime.fromISO(firstSunday).plus({ week: 6 })}">
             </auro-datepicker-week>
@@ -283,12 +283,12 @@ const containerCasses = {
             firstDayOfWeek_month="${DateTime.fromISO(firstSunday).plus({ week: 7 }).month}"
             firstDayOfWeek_day="${DateTime.fromISO(firstSunday).plus({ week: 7 }).day}"
 
-            rangeStart_year="${this.rangeStart_year}"
-              rangeStart_month="${this.rangeStart_month}"
-              rangeStart_day="${this.rangeStart_day}"
-              rangeEnd_year="${this.rangeEnd_year}"
-              rangeEnd_month="${this.rangeEnd_month}"
-              rangeEnd_day="${this.rangeEnd_day}"
+            departDate_year="${this.departDate_year}"
+              departDate_month="${this.departDate_month}"
+              departDate_day="${this.departDate_day}"
+              returnDate_year="${this.returnDate_year}"
+              returnDate_month="${this.returnDate_month}"
+              returnDate_day="${this.returnDate_day}"
             
             firstDayOfWeekDateTime="${DateTime.fromISO(firstSunday).plus({ week: 7 })}">
             </auro-datepicker-week>
