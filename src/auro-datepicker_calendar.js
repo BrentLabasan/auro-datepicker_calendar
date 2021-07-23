@@ -379,9 +379,12 @@ export default class AuroDatePickerCalendar extends LitElement {
 
           <div id="monthNameAndArrows">
             <button 
-            class="${classMap(btnPrevMonthClasses)}"
-            id="btn-prevMonth" 
-            @click="${this.handlePrevMonthClick}">${this.chevronLeft}</button>
+              class="${classMap(btnPrevMonthClasses)}"
+              id="btn-prevMonth" 
+              @click="${this.handlePrevMonthClick}"
+            >
+              ${this.chevronLeft}
+            </button>
 
             <span>
               <span id="displayMonthName">${DateTime.fromObject(obj).plus({month: this.displayMonthOffset }).monthLong}</span>
@@ -394,15 +397,17 @@ export default class AuroDatePickerCalendar extends LitElement {
             </span>
             
             <button
-            class="${classMap(btnNextMonthClasses)}"
-            id="btn-nextMonth" 
-            @click="${this.handleNextMonthClick}">${this.chevronRight}</button>
+              class="${classMap(btnNextMonthClasses)}"
+              id="btn-nextMonth" 
+              @click="${this.handleNextMonthClick}"
+            >
+              ${this.chevronRight}
+            </button>
           </div>
 
-            <div id="containerScrolling">
-              ${this.generateCalendars()}
-
-            </div>
+          <div id="containerScrolling">
+            ${this.generateCalendars()}
+          </div>
 
           </div> 
  
