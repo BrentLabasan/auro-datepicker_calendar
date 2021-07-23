@@ -42,7 +42,6 @@ export default class AuroDatePickerCalendar extends LitElement {
     this.isSelectionModeFromDate = true;
     this.isViewSingleMode = this.hasAttribute('isViewSingleMode');
 
-    this.isCalendarContainerVisible = true;
 
     this.displayMonthOffset = 0;
   }
@@ -86,7 +85,6 @@ export default class AuroDatePickerCalendar extends LitElement {
 
       isSelectionModeFromDate: { type: Boolean },
       isViewSingleMode: { type: Boolean, reflect: true },
-      isCalendarContainerVisible: { type: Boolean },
 
       isDisabled: { type: Boolean },
 
@@ -94,8 +92,6 @@ export default class AuroDatePickerCalendar extends LitElement {
   }
 
   firstUpdated() {
-    // this.isCalendarContainerVisible = false;
-    // debugger;
     // if both a month and year aren't provided for the starting date for auro-datepicker,
     // use the user's current date's month and year
     if (!this.displayMonth && !this.displayYear) {
@@ -216,22 +212,6 @@ export default class AuroDatePickerCalendar extends LitElement {
     }
   }
 
-  handleDatesDisplayClick() {
-    if (this.isDisabled) {
-      return;
-    } else {
-      this.isCalendarContainerVisible = !this.isCalendarContainerVisible;
-    }
-  }
-
-  showCalendarContainer() {
-    this.isCalendarContainerVisible = true;
-  }
-
-  hideCalendarContainer() {
-    this.isCalendarContainerVisible = false;
-  }
-
   generateCalendars() {
     const templates = [];
 
@@ -323,7 +303,6 @@ export default class AuroDatePickerCalendar extends LitElement {
 
     const calendarsContainerClasses = {
       // will ultimately be the functionality of the auro-dropdown
-      'hidden': !this.isCalendarContainerVisible,
 
       // this functionality is for auro-datepicker specifically
       'viewMode-single': this.isViewSingleMode,
@@ -346,68 +325,44 @@ export default class AuroDatePickerCalendar extends LitElement {
 // debugger;
     return html`
         <div>
-          this.isSelectionModeFromDate: ${this.isSelectionModeFromDate}
-          <br/>
-          <br />
-          this.isViewSingleMode: ${this.isViewSingleMode}
-          <br />
-          this.isCalendarContainerVisible ${this.isCalendarContainerVisible}
-          <br />
-          this.isDisabled: ${this.isDisabled}
-        
-          <br />
-          <br />
-        
-          <div id="departureArrivalDatesDisplay" @click="${this.handleDatesDisplayClick}">
 
-
-            ${ DateTime.fromObject({ year: this.departDate_year, month: this.departDate_month, day: this.departDate_day }).toFormat('LL/dd/yyyy')  }
-
-            ||
-
-            ${ DateTime.fromObject({ year: this.returnDate_year, month: this.returnDate_month, day: this.returnDate_day }).toFormat('LL/dd/yyyy')  }
-
-
-        
-          </div>
-          <br />
         
           <div
             id="calendarContainer"
             class="${classMap(calendarsContainerClasses)}"
           >
 
-          <div id="monthNameAndArrows">
-            <button 
-              class="${classMap(btnPrevMonthClasses)}"
-              id="btn-prevMonth" 
-              @click="${this.handlePrevMonthClick}"
-            >
-              ${this.chevronLeft}
-            </button>
+            <div id="monthNameAndArrows">
+              <button 
+                class="${classMap(btnPrevMonthClasses)}"
+                id="btn-prevMonth" 
+                @click="${this.handlePrevMonthClick}"
+              >
+                ${this.chevronLeft}
+              </button>
 
-            <span>
-              <span id="displayMonthName">${DateTime.fromObject(obj).plus({month: this.displayMonthOffset }).monthLong}</span>
-              <span id="displayMonthYear">${DateTime.fromObject(obj).plus({month: this.displayMonthOffset }).year}</span>
-            </span>
+              <span>
+                <span id="displayMonthName">${DateTime.fromObject(obj).plus({month: this.displayMonthOffset }).monthLong}</span>
+                <span id="displayMonthYear">${DateTime.fromObject(obj).plus({month: this.displayMonthOffset }).year}</span>
+              </span>
 
-            <span>
-              <span id="displayMonthPlusOneName">${DateTime.fromObject(obj).plus({month: this.displayMonthOffset + 1 }).monthLong}</span>
-              <span id="displayMonthPlusOneYear">${DateTime.fromObject(obj).plus({month: this.displayMonthOffset + 1 }).year}</span>
-            </span>
-            
-            <button
-              class="${classMap(btnNextMonthClasses)}"
-              id="btn-nextMonth" 
-              @click="${this.handleNextMonthClick}"
-            >
-              ${this.chevronRight}
-            </button>
-          </div>
+              <span>
+                <span id="displayMonthPlusOneName">${DateTime.fromObject(obj).plus({month: this.displayMonthOffset + 1 }).monthLong}</span>
+                <span id="displayMonthPlusOneYear">${DateTime.fromObject(obj).plus({month: this.displayMonthOffset + 1 }).year}</span>
+              </span>
+              
+              <button
+                class="${classMap(btnNextMonthClasses)}"
+                id="btn-nextMonth" 
+                @click="${this.handleNextMonthClick}"
+              >
+                ${this.chevronRight}
+              </button>
+            </div>
 
-          <div id="containerScrolling">
-            ${this.generateCalendars()}
-          </div>
+            <div id="containerScrolling">
+              ${this.generateCalendars()}
+            </div>
 
           </div> 
  
