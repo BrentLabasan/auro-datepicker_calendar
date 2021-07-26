@@ -65,7 +65,7 @@ export default class AuroDatePickerWeek extends LitElement {
 
   render() {
 
-
+// debugger;
       const dateDigitsObject = {
         year: this.firstDayOfWeek_year,
         month: this.firstDayOfWeek_month,
@@ -81,8 +81,17 @@ export default class AuroDatePickerWeek extends LitElement {
       //   // 'alertIcon': this.error
       // };
       
-const isoRangeStart = DateTime.fromObject({year: this.departDate_year, month: this.departDate_month, day: this.departDate_day }).toISO();
-const isoRangeEnd = DateTime.fromObject({year: this.returnDate_year, month: this.returnDate_month, day: this.returnDate_day }).toISO();
+      // didn't help
+      // let isoRangeStart, isoRangeEnd
+      // if (this.departDate_year) {
+      //   isoRangeStart = DateTime.fromObject({year: this.departDate_year, month: this.departDate_month, day: this.departDate_day }).toISO();
+      //   isoRangeEnd = DateTime.fromObject({year: this.returnDate_year, month: this.returnDate_month, day: this.returnDate_day }).toISO();
+        
+      // }
+// console.log("firstDayOfWeekDateTime", firstDayOfWeekDateTime);
+console.log("wut")
+  const isoRangeStart = DateTime.fromObject({year: this.departDate_year, month: this.departDate_month, day: this.departDate_day }).toISO();
+  const isoRangeEnd = DateTime.fromObject({year: this.returnDate_year, month: this.returnDate_month, day: this.returnDate_day }).toISO();
 
 
 // debugger;

@@ -39,7 +39,7 @@ export default class AuroDatePickerCalendar extends LitElement {
               */
              this.chevronRight = this.getIconAsHtml(chevronRight);
 
-    this.isSelectionModeFromDate = true;
+    this.isSelectionDepartDate = true;
     this.isViewSingleMode = this.hasAttribute('isViewSingleMode');
 
 
@@ -83,7 +83,7 @@ export default class AuroDatePickerCalendar extends LitElement {
       returnDate_day: {type: Number},
       returnDate_year: {type: Number},
 
-      isSelectionModeFromDate: { type: Boolean },
+      isSelectionDepartDate: { type: Boolean },
       isViewSingleMode: { type: Boolean, reflect: true },
 
       isDisabled: { type: Boolean },
@@ -92,32 +92,35 @@ export default class AuroDatePickerCalendar extends LitElement {
   }
 
   firstUpdated() {
-    // if both a month and year aren't provided for the starting date for auro-datepicker,
-    // use the user's current date's month and year
-    if (!this.displayMonth && !this.displayYear) {
-      // debugger;
-      const dt = DateTime.now();
-      this.selectedDepartureDateTime = dt;
-      this.selectedArrivalDateTime = dt.plus({ month: 1 });
+    const dt = DateTime.now();
 
-      this.displayMonth = dt.month;
-      console.log("displayMonth", this.displayMonth);
-      this.displayYear = dt.year;
+    // if auro-dropdown's departDate attributes have all been set
+    if (this.parentElement.getAttribute('departDate_year') && this.parentElement.getAttribute('departDate_month') && this.parentElement.getAttribute('departDate_day')) {
+      this.departDate_year = this.parentElement.getAttribute('departDate_year');
+      this.departDate_month = this.parentElement.getAttribute('departDate_month');
+      this.departDate_day = this.parentElement.getAttribute('departDate_day');
+
+      const dt2 = DateTime.fromObject({year: this.departDate_year, month: this.departDate_month, day: this.departDate_day}).plus({month: 1});
+
+      this.returnDate_year = dt2.year;
+      this.returnDate_month = dt2.month;
+      this.returnDate_day = dt2.day;
+
+      // sets what month is acutally shown when popover opens
+      this.displayMonth = this.departDate_month;
+      this.displayYear = this.departDate_year;
+    } else {
 
       this.departDate_year = dt.year;
       this.departDate_month = dt.month;
       this.departDate_day = dt.day;
 
-      this.returnDate_year = dt.year;
-      this.returnDate_month = dt.month;
-      this.returnDate_day = dt.day;
+      const dt2 = DateTime.fromISO(dt).plus({month: 1});
 
-      // debugger;
+      this.returnDate_year = dt2.year;
+      this.returnDate_month = dt2.month;
+      this.returnDate_day = dt2.day;
     }
-    // debugger;
-    // console.log("iii")
-    // console.log(this.displayMonth)
-    // console.log(this.displayYear)
 
     this.addEventListener('dayClicked', (data) => {
       // alert(data);
@@ -146,7 +149,7 @@ export default class AuroDatePickerCalendar extends LitElement {
 
 
       // this is currently for double mode
-      if (this.isSelectionModeFromDate) {
+      if (this.isSelectionDepartDate) {
         this.selectedDepartureDateTime = data.detail.dateTime;
 
         const pendingRangeStart = DateTime.fromObject(genLuxonObj(data.detail.year, data.detail.month, data.detail.day));
@@ -157,6 +160,8 @@ export default class AuroDatePickerCalendar extends LitElement {
         // BOOKMARK
         if ( currentRangeEnd && comesAfter(pendingRangeStart, currentRangeEnd) ) { // pending departure date selection comes after the current arival date
           alert("pending start date CAN NOT be after current end date");
+
+          return;
         }
 
         // debugger;
@@ -164,6 +169,8 @@ export default class AuroDatePickerCalendar extends LitElement {
         this.departDate_year = data.detail.year;
         this.departDate_month = data.detail.month;
         this.departDate_day = data.detail.day;
+
+        debugger;
 
 
         // todo rainy day, I totally messed up what I was trying to do. this is rainy day code
@@ -189,7 +196,7 @@ export default class AuroDatePickerCalendar extends LitElement {
         this.returnDate_day = data.detail.day;
       }
 
-      this.isSelectionModeFromDate = !this.isSelectionModeFromDate;
+      this.isSelectionDepartDate = !this.isSelectionDepartDate;
     });
 
 
@@ -215,6 +222,11 @@ export default class AuroDatePickerCalendar extends LitElement {
   generateCalendars() {
     const templates = [];
 
+    // todo bookmark
+    // 1 no error
+    // 2 is when error happens 1
+    // 8+ is 2
+    // 11+ is 3
     for (let i = 0; i < 12; i++) {
       templates.push(html`
         <auro-datepicker-month
@@ -292,6 +304,8 @@ export default class AuroDatePickerCalendar extends LitElement {
   }
 
   render() {
+    console.log("auro-datepicker_calendar.js this.render()");
+
     // this.isViewSingleMode = false;
     // console.log(this.getAttribute('id'));
         // this.isViewSingleMode = true;
