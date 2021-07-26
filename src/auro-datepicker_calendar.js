@@ -93,7 +93,7 @@ export default class AuroDatePickerCalendar extends LitElement {
 
   firstUpdated() {
     const dt = DateTime.now();
-
+// debugger;
     // if auro-dropdown's departDate attributes have all been set
     if (this.parentElement.getAttribute('departDate_year') && this.parentElement.getAttribute('departDate_month') && this.parentElement.getAttribute('departDate_day')) {
       this.departDate_year = this.parentElement.getAttribute('departDate_year');
@@ -170,7 +170,19 @@ export default class AuroDatePickerCalendar extends LitElement {
         this.departDate_month = data.detail.month;
         this.departDate_day = data.detail.day;
 
-        debugger;
+        this.dispatchEvent(new CustomEvent('changeAttributeGlobally', {
+          bubbles: true,
+          cancelable: false,
+          composed: true,
+          detail: 
+          {
+            departDate_year: data.detail.year,
+            departDate_month: data.detail.month,
+            departDate_day: data.detail.day,
+          }
+        }));
+
+        // debugger;
 
 
         // todo rainy day, I totally messed up what I was trying to do. this is rainy day code
@@ -194,6 +206,18 @@ export default class AuroDatePickerCalendar extends LitElement {
         this.returnDate_year = data.detail.year;
         this.returnDate_month = data.detail.month;
         this.returnDate_day = data.detail.day;
+
+        this.dispatchEvent(new CustomEvent('changeAttributeGlobally', {
+          bubbles: true,
+          cancelable: false,
+          composed: true,
+          detail: 
+          {
+            returnDate_year: data.detail.year,
+            returnDate_month: data.detail.month,
+            returnDate_day: data.detail.day,
+          }
+        }));
       }
 
       this.isSelectionDepartDate = !this.isSelectionDepartDate;

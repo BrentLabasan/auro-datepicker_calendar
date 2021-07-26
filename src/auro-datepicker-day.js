@@ -71,10 +71,13 @@ export default class AuroDatePickerDay extends LitElement {
       this.labelElement.classList.add('inputElement-label--disabled')
     }
   }
+  
 
   handleDayClick() {
+
     // alert();
-// debugger;
+    // debugger;
+
     if (this.isDisabled) {
       return null;
     }
@@ -90,6 +93,7 @@ export default class AuroDatePickerDay extends LitElement {
         day: this.day
       }
     }));
+
   }
 
 
