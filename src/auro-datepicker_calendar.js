@@ -102,9 +102,15 @@ export default class AuroDatePickerCalendar extends LitElement {
 
       const dt2 = DateTime.fromObject({year: this.departDate_year, month: this.departDate_month, day: this.departDate_day}).plus({month: 1});
 
-      this.returnDate_year = dt2.year;
-      this.returnDate_month = dt2.month;
-      this.returnDate_day = dt2.day;
+      if (this.parentElement.getAttribute('returnDate_year') && this.parentElement.getAttribute('returnDate_month') && this.parentElement.getAttribute('returnDate_day')) {
+        this.returnDate_year = this.parentElement.getAttribute('returnDate_year');
+        this.returnDate_month = this.parentElement.getAttribute('returnDate_month');
+        this.returnDate_day = this.parentElement.getAttribute('returnDate_day');
+      } else {
+        this.returnDate_year = dt2.year;
+        this.returnDate_month = dt2.month;
+        this.returnDate_day = dt2.day;
+      }
 
       // sets what month is acutally shown when popover opens
       this.displayMonth = this.departDate_month;
