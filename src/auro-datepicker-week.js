@@ -89,7 +89,7 @@ export default class AuroDatePickerWeek extends LitElement {
         
       // }
 // console.log("firstDayOfWeekDateTime", firstDayOfWeekDateTime);
-console.log("wut")
+
   const isoRangeStart = DateTime.fromObject({year: this.departDate_year, month: this.departDate_month, day: this.departDate_day }).toISO();
   const isoRangeEnd = DateTime.fromObject({year: this.returnDate_year, month: this.returnDate_month, day: this.returnDate_day }).toISO();
 
