@@ -3,7 +3,7 @@ import '../src/auro-datepicker-calendar.js';
 import '../src/auro-datepicker-month.js';
 import '../src/auro-datepicker-week.js';
 import '../src/auro-datepicker-day.js';
-import fetchMock from "../node_modules/fetch-mock/esm/client"
+import fetchMock from "fetch-mock/esm/client";
 
 import { DateTime } from 'luxon';
 
@@ -31,7 +31,7 @@ describe('auro-datepicker-calendar', () => {
 
   // 💻 DESKTOP 📅 ONE WAY | include the attribute "isOneWay"
 
-  it.only('Depart date has NOT been set, so the depart date has been set to today\'s date. No return date should be set.', async () => {
+  it('Depart date has NOT been set, so the depart date has been set to today\'s date. No return date should be set.', async () => {
     const el = await fixture(html`
       <div>
         <auro-datepicker-calendar isOneWay>
@@ -47,7 +47,7 @@ describe('auro-datepicker-calendar', () => {
     expect(parseInt(target.getAttribute('departDate_month'))).to.equal(date.getMonth() + 1); // +1 is because of date is 0 indexed
     expect(parseInt(target.getAttribute('departDate_day'))).to.equal(date.getDate());
 
-    console.log("target", target);
+    // console.log("target", target);
 
     expect(target.hasAttribute('returnDate_year')).to.equal(false);
     expect(target.hasAttribute('returnDate_month')).to.equal(false);
@@ -59,7 +59,7 @@ describe('auro-datepicker-calendar', () => {
 
   });
 
-  it('Depart date has been set.', async () => {
+/*   it('Depart date has been set. No return date should be set.', async () => {
     const el = await fixture(html`
       <div departDate_year="2021" departDate_month="12" departDate_day="30">
         <auro-datepicker-calendar isOneWay>
@@ -67,47 +67,25 @@ describe('auro-datepicker-calendar', () => {
       </div>
     `);
 
-const target = el.querySelector('auro-datepicker-calendar');
+    const target = el.querySelector('auro-datepicker-calendar');
 
-const date = new Date();
+    const date = new Date();
 
-expect(parseInt(target.getAttribute('departDate_year'))).to.equal(date.getFullYear());
-expect(parseInt(target.getAttribute('departDate_month'))).to.equal(date.getMonth() + 1); // +1 is because of date is 0 indexed
-expect(parseInt(target.getAttribute('departDate_day'))).to.equal(date.getDate());
+    expect(parseInt(target.getAttribute('departDate_year'))).to.equal(2021);
+    expect(parseInt(target.getAttribute('departDate_month'))).to.equal(12); // +1 is because of date is 0 indexed
+    expect(parseInt(target.getAttribute('departDate_day'))).to.equal(30);
 
-console.log("target", target);
+    // console.log("target", target);
 
-expect(target.hasAttribute('returnDate_year')).to.equal(false);
-expect(target.hasAttribute('returnDate_month')).to.equal(false);
-expect(target.hasAttribute('returnDate_day')).to.equal(false);
+    expect(target.hasAttribute('returnDate_year')).to.equal(false);
+    expect(target.hasAttribute('returnDate_month')).to.equal(false);
+    expect(target.hasAttribute('returnDate_day')).to.equal(false);
 
-  it('', async () => {
-
-  });
-
-  it('', async () => {
-
-  });
+  }); */
 
   // 💻 DESKTOP 📅📅 ROUND-TRIP | omit the attribute "isOneWay"
 
-  it('Depart date has NOT been set, so the depart date has been set to today\'s date. Return date is set to one month from depart date.', async () => {
-
-  });
-
-  it('Depart date and return date have been set.', async () => {
-
-  });
-
-  // 📱 MOBILE 📅 ONE WAY | include the attributes "isOneWay" and "isMobile"
-
-  // 📱 MOBILE 📅📅 ROUND-TRIP | omit the attribute "isOneWay" and include "isMobile"
-
-  it('if ADC\'s parent element doesn\'t have a depart date, set ADC\'s depart date to today\'s date', async () => {
-
-  });
-
-  it('if ADC\'s parent element doesn\'t have a depart date, set ADC\'s depart date to today\'s date', async () => {
+   it('Depart date has NOT been set, so the depart date has been set to today\'s date. Return date is set to one month from depart date.', async () => {
     const el = await fixture(html`
       <div>
         <auro-datepicker-calendar>
@@ -115,50 +93,76 @@ expect(target.hasAttribute('returnDate_day')).to.equal(false);
       </div>
     `);
 
-    const date = new Date();
-
     const target = el.querySelector('auro-datepicker-calendar');
+
+    const date = new Date();
 
     expect(parseInt(target.getAttribute('departDate_year'))).to.equal(date.getFullYear());
     expect(parseInt(target.getAttribute('departDate_month'))).to.equal(date.getMonth() + 1); // +1 is because of date is 0 indexed
     expect(parseInt(target.getAttribute('departDate_day'))).to.equal(date.getDate());
-
 
     const date2 = DateTime.fromObject({year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate()}).plus({month: 1});
 
     expect(parseInt(target.getAttribute('returnDate_year'))).to.equal(date2.year);
     expect(parseInt(target.getAttribute('returnDate_month'))).to.equal(date2.month);
     expect(parseInt(target.getAttribute('returnDate_day'))).to.equal(date2.day);
-
-
   });
 
-  it('if auro-datepicker-calendar\'s parent element does have a depart date and return date, ADA\'s dates matches', async () => {
+/*   it('Depart date and return date have been set.', async () => {
     const el = await fixture(html`
-      <div>
-        <auro-datepicker-calendar   isoneway="" departdate_year="2021" departdate_month="9"
-          departdate_day="10" returndate_year="2021" returndate_month="10" returndate_day="10" displaymonth="9"
-          displayyear="2021" displaymonthoffset="0">
+      <div departDate_year="2021" departDate_month="12" departDate_day="30" returnDate_year="2022" returnDate_month="1" returnDate_day="5">
+        <auro-datepicker-calendar>
         </auro-datepicker-calendar>
       </div>
     `);
-  });
 
-  it('if the depart date and/or arrival date attributes get changed, then the change is reflected in the input', async () => {
+    const target = el.querySelector('auro-datepicker-calendar');
 
-  });
+    const date = new Date();
 
-  it('if ADA has "disabled" attribute, then its input elements will also have "disabled" attribute', async () => {
+    expect(parseInt(target.getAttribute('departDate_year'))).to.equal(2021);
+    expect(parseInt(target.getAttribute('departDate_month'))).to.equal(12);
+    expect(parseInt(target.getAttribute('departDate_day'))).to.equal(30);
 
-  });
+    expect(parseInt(target.getAttribute('returnDate_year'))).to.equal(2022);
+    expect(parseInt(target.getAttribute('returnDate_month'))).to.equal(1);
+    expect(parseInt(target.getAttribute('returnDate_day'))).to.equal(5);
+  }); */
 
-  it('if user clicks depart input, auro-datepicker-calendar selection mode is for depart date', async () => {
+  // 📱 MOBILE 📅 ONE WAY | include the attributes "isOneWay" and "isMobile"
 
-  });
+  // 📱 MOBILE 📅📅 ROUND-TRIP | omit the attribute "isOneWay" and include "isMobile"
 
-  it('if user clicks return input, auro-datepicker-calendar selection mode is for return date', async () => {
+  // it('if ADC\'s parent element doesn\'t have a depart date, set ADC\'s depart date to today\'s date', async () => {
 
-  });
+  // });
+
+  // it('if auro-datepicker-calendar\'s parent element does have a depart date and return date, ADA\'s dates matches', async () => {
+  //   const el = await fixture(html`
+  //     <div>
+  //       <auro-datepicker-calendar isoneway="" departdate_year="2021" departdate_month="9"
+  //         departdate_day="10" returndate_year="2021" returndate_month="10" returndate_day="10" displaymonth="9"
+  //         displayyear="2021" displaymonthoffset="0">
+  //       </auro-datepicker-calendar>
+  //     </div>
+  //   `);
+  // });
+
+  // it('if the depart date and/or arrival date attributes get changed, then the change is reflected in the input', async () => {
+
+  // });
+
+  // it('if ADA has "disabled" attribute, then its input elements will also have "disabled" attribute', async () => {
+
+  // });
+
+  // it('if user clicks depart input, auro-datepicker-calendar selection mode is for depart date', async () => {
+
+  // });
+
+  // it('if user clicks return input, auro-datepicker-calendar selection mode is for return date', async () => {
+
+  // });
 
   // it('can only click forward button for the designated amount of times', async () => {
   //   const el = await fixture(html`

@@ -46,6 +46,7 @@ $height: 470px;
 
 #btn-prevMonth {
   position: absolute;
+  z-index: 99999;
 
   top: 42px;
   left: 0;
@@ -53,12 +54,12 @@ $height: 470px;
   border: 0;
   background: none;
 
-  z-index: 99999;
 
 }
 
 #btn-nextMonth {
   position: absolute;
+  z-index: 99999;
 
   top: 42px;
   right: 0;
@@ -66,7 +67,6 @@ $height: 470px;
   border: 0;
   background: none;
 
-  z-index: 99999;
 }
 
 
@@ -79,7 +79,7 @@ button {
 
     // works
     // box-shadow: inset 0 0 10px blue;
-    box-shadow: inset 0 0 5px blue;
+    box-shadow: inset 0 0 5px rgb(0 0 255);
   }
 }
 
@@ -87,6 +87,7 @@ button {
 
   // will ultimately be the functionality of the auro-dropdown
   // position: absolute;
+  position: relative;
 
   overflow: hidden;
   // width: 335px;
@@ -98,7 +99,6 @@ button {
 
   background-color: rgb(255 255 255);
 
-  position: relative;
 
   // for debugging purposes
   // border: 1px solid #dbdbdb;
@@ -183,12 +183,12 @@ margin: 0 30px;
   text-align: center;
 
 
-
-  @include auro_breakpoint--sm {
-    // display: none;
-    display: inline-block;
-    width: 375px;
-  }
+  // TODO lint problem
+  // @include auro_breakpoint--sm {
+  //   // display: none;
+  //   display: inline-block;
+  //   width: 375px;
+  // }
 
 }
 

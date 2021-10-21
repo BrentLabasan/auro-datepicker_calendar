@@ -144,7 +144,6 @@ export default class AuroDatePickerDay extends LitElement {
 
     // for some reason, Enter button causes the component to rerender, unless preventDefault is called
     event.preventDefault();
-    let updated;
     // remember that when debugging things that have to do with .focus(), if you click into the Dev Console, the focus will be off the page!
 
 
@@ -202,20 +201,6 @@ export default class AuroDatePickerDay extends LitElement {
     if (event.target.nodeName === "AURO-DROPDOWN" && event.shiftKey && event.keyCode === 9) {
       this.toggleHide();
     } */
-  }
-
-  brentLog(funcName) {
-    let m = parseInt(this.month)
-    let blah2 = (m < 10) ? ("0" + m) : m
-
-    let n = parseInt(this.day)
-    let blah = (n < 10) ? ("0" + n) : n
-
-
-    // console.log(`day ${funcName}() ${blah2}-${blah} ${this}`); // this = [object HTMLElement]
-
-    // debug purposes; keep
-    // console.log(`day ${funcName}() ${blah2}-${blah} ${this.tabindex}`);
   }
 
 
@@ -293,9 +278,6 @@ export default class AuroDatePickerDay extends LitElement {
     if (this.disabled) {
       this.labelElement.classList.add('inputElement-label--disabled');
     }
-
-    // debug purposes
-    this.brentLog('render');
 
 
     const inbetweenClasses = {
@@ -392,7 +374,6 @@ export default class AuroDatePickerDay extends LitElement {
         </span>
       
         <span id="dayPrice" class="${classMap(dayPriceClasses)}">
-          <!-- ${this.year}-${this.month}-${this.day} -->
           ${this.priceData && this.priceData[`${this.year}-${this.month}-${this.day}`] ? html`<span>$${this.priceData[`${this.year}-${this.month}-${this.day}`]}</span>` : html`<span>&nbsp;</span>`}
         </span>
       

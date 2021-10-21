@@ -93,6 +93,8 @@ export default class AuroDatePickerCalendar extends LitElement {
       isOneWay: { type: Boolean, reflect: true },
 
       isDisabled: { type: Boolean },
+
+      numbMonthsToGenerate: { type: Number},
     };
   }
 
@@ -145,15 +147,18 @@ export default class AuroDatePickerCalendar extends LitElement {
       this.departDate_day = this.parentElement.getAttribute('departDate_day');
 
       const dt2 = DateTime.fromObject({year: this.departDate_year, month: this.departDate_month, day: this.departDate_day}).plus({month: 1});
-      debugger;
+
       if (this.parentElement.getAttribute('returnDate_year') && this.parentElement.getAttribute('returnDate_month') && this.parentElement.getAttribute('returnDate_day')) {
         this.returnDate_year = this.parentElement.getAttribute('returnDate_year');
         this.returnDate_month = this.parentElement.getAttribute('returnDate_month');
         this.returnDate_day = this.parentElement.getAttribute('returnDate_day');
       } else {
-        this.returnDate_year = dt2.year;
-        this.returnDate_month = dt2.month;
-        this.returnDate_day = dt2.day;
+        if (!this.isOneWay) {
+          this.returnDate_year = dt2.year;
+          this.returnDate_month = dt2.month;
+          this.returnDate_day = dt2.day;
+        }
+
       }
 
       // sets what month is acutally shown when popover opens
@@ -328,7 +333,7 @@ export default class AuroDatePickerCalendar extends LitElement {
                   let kf1 = `translateX(${-1 * ( MONTH_WIDTH + MONTH_MARGIN_RIGHT ) * this.displayMonthOffset}px)`;
                   let kf2 = `translateX(${-1 * ( MONTH_WIDTH + MONTH_MARGIN_RIGHT ) * (this.displayMonthOffset + 1)}px)`;
               
-                  console.log(`${kf1} ${kf2}`);
+                  // console.log(`${kf1} ${kf2}`);
               
                   const keyframes = { transform: [ kf1, kf2] };
               
@@ -374,7 +379,7 @@ export default class AuroDatePickerCalendar extends LitElement {
                   let kf1 = `translateX(${-1 * ( MONTH_WIDTH + MONTH_MARGIN_RIGHT ) * this.displayMonthOffset}px)`;
                   let kf2 = `translateX(${-1 * ( MONTH_WIDTH + MONTH_MARGIN_RIGHT ) * (this.displayMonthOffset - 1)}px)`;
               
-                  console.log(`${kf1} ${kf2}`);
+                  // console.log(`${kf1} ${kf2}`);
               
                   const keyframes = { transform: [ kf1, kf2] };
               
@@ -439,7 +444,7 @@ export default class AuroDatePickerCalendar extends LitElement {
       let kf1 = `translateX(${-1 * ( MONTH_WIDTH + MONTH_MARGIN_RIGHT ) * (this.displayMonthOffset - 1)}px)`;
       let kf2 = `translateX(${-1 * ( MONTH_WIDTH + MONTH_MARGIN_RIGHT ) * (this.displayMonthOffset)}px)`;
   
-      console.log(`${kf1} ${kf2}`);
+      // console.log(`${kf1} ${kf2}`);
   
       const keyframes = { transform: [ kf1, kf2] };
   
@@ -496,7 +501,7 @@ export default class AuroDatePickerCalendar extends LitElement {
   } */
 
   shouldUpdate(changedProperties) {
-    console.log("changedProperties", changedProperties);
+    // console.log("changedProperties", changedProperties);
 
         // debugger;
     // return true;
@@ -515,7 +520,7 @@ export default class AuroDatePickerCalendar extends LitElement {
     // debugger;
 
     if (changedProperties.size === 2 && changedProperties.has('displayMonthOffset') && changedProperties.has('displayMonth')) {
-      debugger;
+
       // this.setAttribute('displaymonthoffset', changedProperties.get('displayMonthOffset'));
       // this.setAttribute('displaymonth', changedProperties.get('displayMonth'));
       this.setAttribute('displaymonthoffset', this.displayMonthOffset);
@@ -527,7 +532,7 @@ export default class AuroDatePickerCalendar extends LitElement {
   }
 
   generateCalendars() {
-    console.log('calendar.js generateCalendars()');
+    // console.log('calendar.js generateCalendars()');
 
     const templates = [];
 
@@ -545,13 +550,6 @@ export default class AuroDatePickerCalendar extends LitElement {
     for (let i = 0; i < 12; i++) {
       // debugger;
       templates.push(html`
-
-          <!-- <div class="mobile-monthNameAndYear">
-            <span>
-              ${DateTime.fromObject({ month: this.displayMonth, year: this.displayYear }).plus({ month: i }).toFormat('LLLL')}
-              ${DateTime.fromObject({ month: this.displayMonth, year: this.displayYear }).plus({ month: i }).year}
-            </span>
-          </div> -->
           
           <auro-datepicker-month
 
@@ -599,7 +597,7 @@ export default class AuroDatePickerCalendar extends LitElement {
     let kf1 = `translateX(${-1 * ( MONTH_WIDTH + MONTH_MARGIN_RIGHT ) * this.displayMonthOffset}px)`;
     let kf2 = `translateX(${-1 * ( MONTH_WIDTH + MONTH_MARGIN_RIGHT ) * (this.displayMonthOffset - 1)}px)`;
 
-    console.log(`${kf1} ${kf2}`);
+    // console.log(`${kf1} ${kf2}`);
 
     const keyframes = { transform: [ kf1, kf2] };
 
@@ -639,7 +637,7 @@ export default class AuroDatePickerCalendar extends LitElement {
     let kf1 = `translateX(${-1 * ( MONTH_WIDTH + MONTH_MARGIN_RIGHT ) * this.displayMonthOffset}px)`;
     let kf2 = `translateX(${-1 * ( MONTH_WIDTH + MONTH_MARGIN_RIGHT ) * (this.displayMonthOffset + 1)}px)`;
 
-    console.log(`${kf1} ${kf2}`);
+    // console.log(`${kf1} ${kf2}`);
 
     const keyframes = { transform: [ kf1, kf2] };
 
@@ -702,7 +700,7 @@ export default class AuroDatePickerCalendar extends LitElement {
             }
     
             if (that.isOneWay) {
-                      debugger;
+
               return xMonth === that.displayMonth + this.displayMonthOffset; // the +1 is when right arrow is clicked
             } else {
               return xMonth === day.getAttribute('displayMonth') + day.getAttribute('displayMonthOffset') || xMonth === handleRollover(day.getAttribute('displayMonth') + day.getAttribute('displayMonthOffset') + 1) ;
@@ -730,7 +728,7 @@ export default class AuroDatePickerCalendar extends LitElement {
   
   render() {
     // debugger;
-    console.log("calendar.js render()");
+    // console.log("calendar.js render()");
 
     const calendarsContainerClasses = {
       // will ultimately be the functionality of the auro-dropdown
@@ -738,11 +736,6 @@ export default class AuroDatePickerCalendar extends LitElement {
       // this functionality is for auro-datepicker specifically
       'viewMode-single': this.isOneWay,
       'viewMode-double': !this.isOneWay,
-    };
-
-    const obj = {
-      month: this.displayMonth,
-      year: this.displayYear
     };
     
     if (this.mobileLayout) {
@@ -815,23 +808,6 @@ export default class AuroDatePickerCalendar extends LitElement {
           >
             ${this.chevronLeft}
           </button>
-
-            <!-- <span>
-              <span id="displayMonthName">${DateTime.fromObject(obj).monthLong}</span>
-              <span id="displayMonthYear">${DateTime.fromObject(obj).year}</span>
-            </span> -->
-
-            <!-- I'm prob not gonna keep this also, right? -->
-            <!-- ${this.isOneWay
-              ? null
-              : html`
-                  <span>
-                    <span id="displayMonthPlusOneName">${DateTime.fromObject(obj).plus({month: this.displayMonthOffset + 1 }).monthLong}</span>
-                    <span id="displayMonthPlusOneYear">${DateTime.fromObject(obj).plus({month: this.displayMonthOffset + 1 }).year}</span>
-                  </span>
-                `} -->
-
-
             
           <button
           aria-label="scroll right"

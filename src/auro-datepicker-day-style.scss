@@ -4,19 +4,19 @@
 // ---------------------------------------------------------------------
 
 // Import Auro tokens
-@import "../node_modules/@alaskaairux/design-tokens/dist/tokens/SCSSVariables";
-@import "../node_modules/@alaskaairux/design-tokens/dist/tokens/SassCustomProperties";
-@import "../node_modules/@alaskaairux/design-tokens/dist/tokens/SCSSVariableMap";
+@import '../node_modules/@alaskaairux/design-tokens/dist/tokens/SCSSVariables';
+@import '../node_modules/@alaskaairux/design-tokens/dist/tokens/SassCustomProperties';
+@import '../node_modules/@alaskaairux/design-tokens/dist/tokens/SCSSVariableMap';
 
-@import "../node_modules/@alaskaairux/webcorestylesheets/dist/breakpoints";
-@import "../node_modules/@alaskaairux/webcorestylesheets/dist/core";
+@import '../node_modules/@alaskaairux/webcorestylesheets/dist/breakpoints';
+@import '../node_modules/@alaskaairux/webcorestylesheets/dist/core';
 
-@import "../node_modules/@alaskaairux/webcorestylesheets/dist/utilityClasses/displayProperties";
+@import '../node_modules/@alaskaairux/webcorestylesheets/dist/utilityClasses/displayProperties';
 
 $auro-inset-spacing-options: lg;
-$auro-inset-directions: "";
+$auro-inset-directions: '';
 
-@import "../node_modules/@alaskaairux/webcorestylesheets/dist/utilityMixins/insetUtility";
+@import '../node_modules/@alaskaairux/webcorestylesheets/dist/utilityMixins/insetUtility';
 
 $zIndexText: 200;
 
@@ -39,7 +39,7 @@ $zIndexText: 200;
 }
 
 :host(:focus) {
-  border: 2px dotted blue;
+  border: 2px dotted rgb(0 0 255);
 }
 
 :host(:hover) {
@@ -147,7 +147,7 @@ $zIndexText: 200;
 
   div {
     // debug
-    background-color: orange;
+    background-color: rgb(255 166 0);
 
     // background-color: #F7F7F7;
     color: #222222;
@@ -177,26 +177,27 @@ $zIndexText: 200;
 .disabled {
   // background-color: yellow;
   color: #9fabbb;
+  cursor: default;
 
   pointer-events: none; // wtf, this isn't working. But it should be handled by the JS anyway.
-  cursor: default;
 }
 
 button {
   border: none;
-  background-color: white;
+  background-color: rgb(255 255 255);
 
+  // TODO lint problem
+  // &[tabindex='0'] {
+  //   // // css for debugging purposes
+  //   // border: 3px dotted red;
+  // }
 
-  &[tabindex="0"] {
-    // // css for debugging purposes
-    // border: 3px dotted red;
-  }
   &:focus {
-    border: 2px inset blue;
+    border: 2px inset rgb(0 0 255);
   }
 }
 
-// [isdisabled=""] {
+// [isdisabled=''] {
 //   border: 3px dotted red;
 //   cursor: none;
 // }
