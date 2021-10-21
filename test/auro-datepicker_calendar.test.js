@@ -59,7 +59,7 @@ describe('auro-datepicker-calendar', () => {
 
   });
 
-/*   it('Depart date has been set. No return date should be set.', async () => {
+  it('Depart date has been set. No return date should be set.', async () => {
     const el = await fixture(html`
       <div departDate_year="2021" departDate_month="12" departDate_day="30">
         <auro-datepicker-calendar isOneWay>
@@ -81,7 +81,7 @@ describe('auro-datepicker-calendar', () => {
     expect(target.hasAttribute('returnDate_month')).to.equal(false);
     expect(target.hasAttribute('returnDate_day')).to.equal(false);
 
-  }); */
+  });
 
   // 💻 DESKTOP 📅📅 ROUND-TRIP | omit the attribute "isOneWay"
 
@@ -108,7 +108,7 @@ describe('auro-datepicker-calendar', () => {
     expect(parseInt(target.getAttribute('returnDate_day'))).to.equal(date2.day);
   });
 
-/*   it('Depart date and return date have been set.', async () => {
+   it('Depart date and return date have been set.', async () => {
     const el = await fixture(html`
       <div departDate_year="2021" departDate_month="12" departDate_day="30" returnDate_year="2022" returnDate_month="1" returnDate_day="5">
         <auro-datepicker-calendar>
@@ -127,7 +127,7 @@ describe('auro-datepicker-calendar', () => {
     expect(parseInt(target.getAttribute('returnDate_year'))).to.equal(2022);
     expect(parseInt(target.getAttribute('returnDate_month'))).to.equal(1);
     expect(parseInt(target.getAttribute('returnDate_day'))).to.equal(5);
-  }); */
+  });
 
   // 📱 MOBILE 📅 ONE WAY | include the attributes "isOneWay" and "isMobile"
 
