@@ -199,25 +199,21 @@ describe('auro-datepicker-calendar', () => {
       </div>
     `);
 
-    const ada = el.querySelector('auro-datepicker-calendar');
+    const adc = el.querySelector('auro-datepicker-calendar');
 
-    const elDay1MonthFromNow = findTargetDay(ada, dt1MonthFromNow.year, dt1MonthFromNow.month, dt1MonthFromNow.day);
+    const elDay1MonthFromNow = findTargetDay(adc, dt1MonthFromNow.year, dt1MonthFromNow.month, dt1MonthFromNow.day);
     console.log("elDay1MonthFromNow", elDay1MonthFromNow);
     elDay1MonthFromNow.click();
     await elementUpdated(elDay1MonthFromNow);
 
-    expect(parseInt(ada.getAttribute('departDate_year'))).to.equal(dt1MonthFromNow.year);
-    expect(parseInt(ada.getAttribute('departDate_month'))).to.equal(dt1MonthFromNow.month);
-    expect(parseInt(ada.getAttribute('departDate_day'))).to.equal(dt1MonthFromNow.day);
+    expectCorrectDepartDate(adc, dt1MonthFromNow);
 
-    const elDay6MonthsFromNow = findTargetDay(ada, dt6MonthsFromNow.year, dt6MonthsFromNow.month, dt6MonthsFromNow.day);
+    const elDay6MonthsFromNow = findTargetDay(adc, dt6MonthsFromNow.year, dt6MonthsFromNow.month, dt6MonthsFromNow.day);
     console.log("elDay6MonthsFromNow", elDay6MonthsFromNow);
     elDay6MonthsFromNow.click();
     await elementUpdated(elDay6MonthsFromNow);
 
-    expect(parseInt(ada.getAttribute('returnDate_year'))).to.equal(dt6MonthsFromNow.year);
-    expect(parseInt(ada.getAttribute('returnDate_month'))).to.equal(dt6MonthsFromNow.month);
-    expect(parseInt(ada.getAttribute('returnDate_day'))).to.equal(dt6MonthsFromNow.day);
+    expectCorrectReturnDate(adc, dt6MonthsFromNow);
   });
 
   // it('', async () => {
@@ -428,14 +424,14 @@ function findTargetDay(ada, year, month, day) {
   
 }
 
-function expectCorrectDepartDate(ada, year, month, day) {
-  expect(parseInt(ada.getAttribute('departDate_year'))).to.equal(year);
-  expect(parseInt(ada.getAttribute('departDate_month'))).to.equal(month);
-  expect(parseInt(ada.getAttribute('departDate_day'))).to.equal(day);
+function expectCorrectDepartDate(adc, luxonDateTime) {
+  expect(parseInt(adc.getAttribute('departDate_year'))).to.equal(luxonDateTime.year);
+  expect(parseInt(adc.getAttribute('departDate_month'))).to.equal(luxonDateTime.month);
+  expect(parseInt(adc.getAttribute('departDate_day'))).to.equal(luxonDateTime.day);
 }
 
-function expectCorrectReturnDate(ada, year, month, day) {
-  expect(parseInt(ada.getAttribute('returnDate_year'))).to.equal(year);
-  expect(parseInt(ada.getAttribute('returnDate_month'))).to.equal(month);
-  expect(parseInt(ada.getAttribute('returnDate_day'))).to.equal(day);
+function expectCorrectReturnDate(adc, luxonDateTime) {
+  expect(parseInt(adc.getAttribute('returnDate_year'))).to.equal(luxonDateTime.year);
+  expect(parseInt(adc.getAttribute('returnDate_month'))).to.equal(luxonDateTime.month);
+  expect(parseInt(adc.getAttribute('returnDate_day'))).to.equal(luxonDateTime.day);
 }
