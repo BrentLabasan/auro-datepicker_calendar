@@ -1,4 +1,4 @@
-import { fixture, html, expect } from '@open-wc/testing';
+import { fixture, html, expect, elementUpdated } from '@open-wc/testing';
 import '../src/auro-datepicker-calendar.js';
 import '../src/auro-datepicker-month.js';
 import '../src/auro-datepicker-week.js';
@@ -8,6 +8,12 @@ import fetchMock from "fetch-mock/esm/client";
 import { DateTime } from 'luxon';
 
 import AMOUNT_MONTHS_SHOWN from '../src/constants.js';
+
+const dtNow = DateTime.now();
+
+function dtInFuture(months, days) {
+  return DateTime.now().plus({month: months, day: days});
+}
 
 describe('auro-datepicker-calendar', () => {
   beforeEach(() => {
@@ -29,7 +35,9 @@ describe('auro-datepicker-calendar', () => {
     fetchMock.reset();
   });
 
-  // 💻 DESKTOP 📅 ONE WAY | include the attribute "isOneWay"
+  // > setting the depart and return dates
+
+  // 💻 DESKTOP 📅 ONE WAY | setting the depart and return dates
 
   it('Depart date has NOT been set, so the depart date has been set to today\'s date. No return date should be set.', async () => {
     const el = await fixture(html`
@@ -39,19 +47,19 @@ describe('auro-datepicker-calendar', () => {
       </div>
     `);
 
-    const target = el.querySelector('auro-datepicker-calendar');
+    const adc = el.querySelector('auro-datepicker-calendar');
 
     const date = new Date();
 
-    expect(parseInt(target.getAttribute('departDate_year'))).to.equal(date.getFullYear());
-    expect(parseInt(target.getAttribute('departDate_month'))).to.equal(date.getMonth() + 1); // +1 is because of date is 0 indexed
-    expect(parseInt(target.getAttribute('departDate_day'))).to.equal(date.getDate());
+    expect(parseInt(adc.getAttribute('departDate_year'))).to.equal(dtNow.year);
+    expect(parseInt(adc.getAttribute('departDate_month'))).to.equal(dtNow.month); // +1 is because of date is 0 indexed
+    expect(parseInt(adc.getAttribute('departDate_day'))).to.equal(dtNow.day);
 
     // console.log("target", target);
 
-    expect(target.hasAttribute('returnDate_year')).to.equal(false);
-    expect(target.hasAttribute('returnDate_month')).to.equal(false);
-    expect(target.hasAttribute('returnDate_day')).to.equal(false);
+    expect(adc.hasAttribute('returnDate_year')).to.equal(false);
+    expect(adc.hasAttribute('returnDate_month')).to.equal(false);
+    expect(adc.hasAttribute('returnDate_day')).to.equal(false);
 
     // expect(parseInt(target.getAttribute('returnDate_year'))).to.equal(date2.year);
     // expect(parseInt(target.getAttribute('returnDate_month'))).to.equal(date2.month);
@@ -60,55 +68,58 @@ describe('auro-datepicker-calendar', () => {
   });
 
   it('Depart date has been set. No return date should be set.', async () => {
+
+    const departDate = dtInFuture(3, 5);
+
     const el = await fixture(html`
-      <div departDate_year="2021" departDate_month="12" departDate_day="30">
+      <div departDate_year="${departDate.year}" departDate_month="${departDate.month}" departDate_day="${departDate.day}">
         <auro-datepicker-calendar isOneWay>
         </auro-datepicker-calendar>
       </div>
     `);
 
-    const target = el.querySelector('auro-datepicker-calendar');
+    const adc = el.querySelector('auro-datepicker-calendar');
 
     const date = new Date();
 
-    expect(parseInt(target.getAttribute('departDate_year'))).to.equal(2021);
-    expect(parseInt(target.getAttribute('departDate_month'))).to.equal(12); // +1 is because of date is 0 indexed
-    expect(parseInt(target.getAttribute('departDate_day'))).to.equal(30);
+    expect(parseInt(adc.getAttribute('departDate_year'))).to.equal(departDate.year);
+    expect(parseInt(adc.getAttribute('departDate_month'))).to.equal(departDate.month);
+    expect(parseInt(adc.getAttribute('departDate_day'))).to.equal(departDate.day);
 
     // console.log("target", target);
 
-    expect(target.hasAttribute('returnDate_year')).to.equal(false);
-    expect(target.hasAttribute('returnDate_month')).to.equal(false);
-    expect(target.hasAttribute('returnDate_day')).to.equal(false);
+    expect(adc.hasAttribute('returnDate_year')).to.equal(false);
+    expect(adc.hasAttribute('returnDate_month')).to.equal(false);
+    expect(adc.hasAttribute('returnDate_day')).to.equal(false);
 
   });
 
-  // 💻 DESKTOP 📅📅 ROUND-TRIP | omit the attribute "isOneWay"
+  // 💻 DESKTOP 📅📅 ROUND TRIP | setting the depart and return dates
 
-   it('Depart date has NOT been set, so the depart date has been set to today\'s date. Return date is set to one month from depart date.', async () => {
-    const el = await fixture(html`
-      <div>
-        <auro-datepicker-calendar>
-        </auro-datepicker-calendar>
-      </div>
-    `);
+    it('Depart date has NOT been set, so the depart date has been set to today\'s date. Return date is set to one month from depart date.', async () => {
+      const el = await fixture(html`
+        <div>
+          <auro-datepicker-calendar>
+          </auro-datepicker-calendar>
+        </div>
+      `);
 
-    const target = el.querySelector('auro-datepicker-calendar');
+      const adc = el.querySelector('auro-datepicker-calendar');
 
-    const date = new Date();
+      const date = new Date();
 
-    expect(parseInt(target.getAttribute('departDate_year'))).to.equal(date.getFullYear());
-    expect(parseInt(target.getAttribute('departDate_month'))).to.equal(date.getMonth() + 1); // +1 is because of date is 0 indexed
-    expect(parseInt(target.getAttribute('departDate_day'))).to.equal(date.getDate());
+      expect(parseInt(adc.getAttribute('departDate_year'))).to.equal(dtNow.year);
+      expect(parseInt(adc.getAttribute('departDate_month'))).to.equal(dtNow.month); // +1 is because of date is 0 indexed
+      expect(parseInt(adc.getAttribute('departDate_day'))).to.equal(dtNow.day);
 
-    const date2 = DateTime.fromObject({year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate()}).plus({month: 1});
+      const oneMonthFromToday = dtInFuture(1, 0);
 
-    expect(parseInt(target.getAttribute('returnDate_year'))).to.equal(date2.year);
-    expect(parseInt(target.getAttribute('returnDate_month'))).to.equal(date2.month);
-    expect(parseInt(target.getAttribute('returnDate_day'))).to.equal(date2.day);
-  });
+      expect(parseInt(adc.getAttribute('returnDate_year'))).to.equal(oneMonthFromToday.year);
+      expect(parseInt(adc.getAttribute('returnDate_month'))).to.equal(oneMonthFromToday.month);
+      expect(parseInt(adc.getAttribute('returnDate_day'))).to.equal(oneMonthFromToday.day);
+    });
 
-   it('Depart date and return date have been set.', async () => {
+    it('Depart date and return date have been set.', async () => {
     const el = await fixture(html`
       <div departDate_year="2021" departDate_month="12" departDate_day="30" returnDate_year="2022" returnDate_month="1" returnDate_day="5">
         <auro-datepicker-calendar>
@@ -128,6 +139,62 @@ describe('auro-datepicker-calendar', () => {
     expect(parseInt(target.getAttribute('returnDate_month'))).to.equal(1);
     expect(parseInt(target.getAttribute('returnDate_day'))).to.equal(5);
   });
+
+  // > clicking the depart and return dates
+
+  // 💻 DESKTOP 📅 ONE WAY | clicking the depart and return dates
+
+  // it('clicking a Day in one way mode changes the depart date', async () => {
+  //   const el = await fixture(html`
+  //     <div departDate_year="2030" departDate_month="8" departDate_day="1">
+  //       <auro-datepicker-calendar isOneWay>
+  //       </auro-datepicker-calendar>
+  //     </div>
+  //   `);
+
+  //   const ada = el.querySelector('auro-datepicker-calendar');
+
+  //   expect(parseInt(ada.getAttribute('departDate_year'))).to.equal(2030);
+  //   expect(parseInt(ada.getAttribute('departDate_month'))).to.equal(8); // +1 is because of date is 0 indexed
+  //   expect(parseInt(ada.getAttribute('departDate_day'))).to.equal(1);
+
+  //   const day1 = findTargetDay(ada, 2030, 8, 1);
+  //   console.log("day1", day1);
+  //   day1.click();
+  //   await elementUpdated(day1);
+
+  //   expect(parseInt(ada.getAttribute('departDate_year'))).to.equal(2030);
+  //   expect(parseInt(ada.getAttribute('departDate_month'))).to.equal(8); // +1 is because of date is 0 indexed
+  //   expect(parseInt(ada.getAttribute('departDate_day'))).to.equal(1);
+
+
+  //   // const date = new Date();
+
+  //   // expect(parseInt(target.getAttribute('departDate_year'))).to.equal(2021);
+  //   // expect(parseInt(target.getAttribute('departDate_month'))).to.equal(12); // +1 is because of date is 0 indexed
+  //   // expect(parseInt(target.getAttribute('departDate_day'))).to.equal(30);
+
+  //   // // console.log("target", target);
+
+  //   // expect(target.hasAttribute('returnDate_year')).to.equal(false);
+  //   // expect(target.hasAttribute('returnDate_month')).to.equal(false);
+  //   // expect(target.hasAttribute('returnDate_day')).to.equal(false);
+
+
+
+  // });
+
+  // it('', async () => {
+
+  // });
+
+  // 💻 DESKTOP 📅📅 ROUND TRIP | clicking the depart and return dates
+
+
+  // it('', async () => {
+
+  // });
+
 
   // 📱 MOBILE 📅 ONE WAY | include the attributes "isOneWay" and "isMobile"
 
@@ -300,3 +367,30 @@ describe('auro-datepicker-calendar', () => {
   // });
 
 });
+
+// retrieves the targetted element in the DOM
+function findTargetDay(ada, year, month, day) {
+    const months = ada.shadowRoot.querySelectorAll('auro-datepicker-month');
+    console.log("months", months);
+    for (let h = 0; h < months.length; h++) {
+      const weeks = months[h].shadowRoot.querySelectorAll('auro-datepicker-week');
+      // console.log("weeks", weeks);
+      for (let i = 0; i < weeks.length; i++) {
+        const days = weeks[i].shadowRoot.querySelectorAll('auro-datepicker-day');
+        // console.log("days", days);
+        for (let j = 0; j < 7; j++) {
+          // console.log(parseInt(days[j].getAttribute('year')) , year, parseInt(days[j].getAttribute('month')) , month, parseInt(days[j].getAttribute('day')) , day);
+          if (
+            parseInt(days[j].getAttribute('year')) === year &&
+            parseInt(days[j].getAttribute('month')) === month &&
+            parseInt(days[j].getAttribute('day')) === day 
+            // days[j].hasAttribute('isnonexistent') === false &&
+            // days[j].hasAttribute('isdisabled') === false // TO CHECK
+            ) {
+              return days[j].shadowRoot.querySelector('button');
+          }
+        }
+      }
+    }
+  
+}

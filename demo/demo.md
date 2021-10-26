@@ -3,7 +3,7 @@
 Depart date has NOT been set, so the depart date has been set to today's date.
 <br/>
 Depart date has been set.
-
+<br/>
 
 <button>tabbable</button>
 
