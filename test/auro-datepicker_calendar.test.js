@@ -20,8 +20,16 @@ const dt2MonthsFromNow = dtInFuture(2, 0);
 const dt6MonthsFromNow = dtInFuture(6, 0);
 const dt11MonthsFromNow = dtInFuture(11, 0);
 
+const dt1DayInPast = dtInPast(0, 1);
+const dt15DaysInPast = dtInPast(0, 15);
+const dt1MonthInPast = dtInPast(1, 0);
+
 function dtInFuture(months, days) {
   return DateTime.now().plus({month: months, day: days});
+}
+
+function dtInPast(months, days) {
+  return DateTime.now().minus({month: months, day: days});
 }
 
 describe('auro-datepicker-calendar', () => {
@@ -199,7 +207,7 @@ describe('auro-datepicker-calendar', () => {
 
   // 💻 DESKTOP 📅📅 ROUND TRIP | clicking the depart and return dates
 
-  it('clicking a Day in round trip mode alternates between changing the depart date and return date', async () => {
+  it('clicking Days in round trip mode alternates between changing the depart date and return date', async () => {
     const el = await fixture(html`
       <div departDate_year="${dt2MonthsFromNow.year}" departDate_month="${dt2MonthsFromNow.month}" departDate_day="${dt2MonthsFromNow.day}">
         <auro-datepicker-calendar>
@@ -243,10 +251,51 @@ describe('auro-datepicker-calendar', () => {
     expectCorrectReturnDate(adc, dt11MonthsFromNow);
   });
 
-  // depart date and return date can be the same in round trip mode
-  // it('', async () => {
+  it('depart date and return date can be the same in round trip mode', async () => {
+    const el = await fixture(html`
+      <div departDate_year="${dt15DaysFromNow.year}" departDate_month="${dt15DaysFromNow.month}" departDate_day="${dt15DaysFromNow.day}" returnDate_year="${dt25DaysFromNow.year}" returnDate_month="${dt25DaysFromNow.month}" returnDate_day="${dt25DaysFromNow.day}">
+        <auro-datepicker-calendar>
+        </auro-datepicker-calendar>
+      </div>
+    `);
 
-  // });
+    const adc = el.querySelector('auro-datepicker-calendar');
+
+    const elDay15DaysFromNow = findTargetDay(adc, dt15DaysFromNow.year, dt15DaysFromNow.month, dt15DaysFromNow.day);
+    console.log("elDay15DaysFromNow", elDay15DaysFromNow);
+
+    elDay15DaysFromNow.click(); // click to select depart date
+    await elementUpdated(elDay15DaysFromNow);
+    expectCorrectDepartDate(adc, dt15DaysFromNow);
+    expectCorrectReturnDate(adc, dt25DaysFromNow);
+
+    elDay15DaysFromNow.click(); // click to select return date
+    await elementUpdated(elDay15DaysFromNow);
+    expectCorrectDepartDate(adc, dt15DaysFromNow);
+    expectCorrectReturnDate(adc, dt15DaysFromNow);
+
+    elDay15DaysFromNow.click(); // click to select depart date
+    await elementUpdated(elDay15DaysFromNow);
+    expectCorrectDepartDate(adc, dt15DaysFromNow);
+    expectCorrectReturnDate(adc, dt15DaysFromNow);
+
+    elDay15DaysFromNow.click(); // click to select return date
+    await elementUpdated(elDay15DaysFromNow);
+    expectCorrectDepartDate(adc, dt15DaysFromNow);
+    expectCorrectReturnDate(adc, dt15DaysFromNow);
+  });
+
+  // todo
+  it('when selecting a depart date, it can\'t be after the current return date', async () => {
+
+  });
+
+  // todo
+  it('when selecting a return date, it can\'t be before the current depart date', async () => {
+
+  });
+
+  // TODO can't click a date in the past
 
   // it('', async () => {
 
