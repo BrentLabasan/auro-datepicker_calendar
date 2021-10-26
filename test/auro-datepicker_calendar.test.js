@@ -191,7 +191,7 @@ describe('auro-datepicker-calendar', () => {
 
   // 💻 DESKTOP 📅📅 ROUND TRIP | clicking the depart and return dates
 
-  it('clicking a Day in round trip mode changes the depart date', async () => {
+  it('clicking a Day in round trip mode alternates between changing the depart date and return date', async () => {
     const el = await fixture(html`
       <div departDate_year="${dt2MonthsFromNow.year}" departDate_month="${dt2MonthsFromNow.month}" departDate_day="${dt2MonthsFromNow.day}">
         <auro-datepicker-calendar>
@@ -213,9 +213,30 @@ describe('auro-datepicker-calendar', () => {
     elDay6MonthsFromNow.click();
     await elementUpdated(elDay6MonthsFromNow);
 
+    expectCorrectDepartDate(adc, dt1MonthFromNow);
     expectCorrectReturnDate(adc, dt6MonthsFromNow);
+
+    const el1DayFromNow = findTargetDay(adc, dt1DayFromNow.year, dt1DayFromNow.month, dt1DayFromNow.day);
+    console.log("el1DayFromNow", el1DayFromNow);
+    el1DayFromNow.click();
+    await elementUpdated(el1DayFromNow);
+    expectCorrectDepartDate(adc, dt1DayFromNow);
+    expectCorrectReturnDate(adc, dt6MonthsFromNow);
+
+    const el11MonthsFromNow = findTargetDay(adc, dt11MonthsFromNow.year, dt11MonthsFromNow.month, dt11MonthsFromNow.day);
+    console.log("el11MonthsFromNow", el11MonthsFromNow);
+    el11MonthsFromNow.click();
+    await elementUpdated(el11MonthsFromNow);
+    expectCorrectDepartDate(adc, dt1DayFromNow);
+    expectCorrectReturnDate(adc, dt11MonthsFromNow);
+    el11MonthsFromNow.click();
+    await elementUpdated(el11MonthsFromNow);
+    expectCorrectDepartDate(adc, dt11MonthsFromNow);
+    expectCorrectReturnDate(adc, dt11MonthsFromNow);
   });
 
+  // in one way mode, clicking the same date multiple times won't introduce erroneous behavior
+  // depart date and return date can be the same in round trip mode
   // it('', async () => {
 
   // });
