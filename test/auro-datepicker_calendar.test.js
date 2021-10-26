@@ -10,6 +10,11 @@ import { DateTime } from 'luxon';
 import AMOUNT_MONTHS_SHOWN from '../src/constants.js';
 
 const dtNow = DateTime.now();
+
+const dt1DayFromNow = dtInFuture(0, 1);
+const dt5DaysFromNow = dtInFuture(0, 5);
+const dt15DaysFromNow = dtInFuture(0, 15);
+const dt25DaysFromNow = dtInFuture(0, 25);
 const dt1MonthFromNow = dtInFuture(1, 0);
 const dt2MonthsFromNow = dtInFuture(2, 0);
 const dt6MonthsFromNow = dtInFuture(6, 0);
@@ -186,6 +191,38 @@ describe('auro-datepicker-calendar', () => {
 
   // 💻 DESKTOP 📅📅 ROUND TRIP | clicking the depart and return dates
 
+  it('clicking a Day in round trip mode changes the depart date', async () => {
+    const el = await fixture(html`
+      <div departDate_year="${dt2MonthsFromNow.year}" departDate_month="${dt2MonthsFromNow.month}" departDate_day="${dt2MonthsFromNow.day}">
+        <auro-datepicker-calendar>
+        </auro-datepicker-calendar>
+      </div>
+    `);
+
+    const ada = el.querySelector('auro-datepicker-calendar');
+
+    const elDay1MonthFromNow = findTargetDay(ada, dt1MonthFromNow.year, dt1MonthFromNow.month, dt1MonthFromNow.day);
+    console.log("elDay1MonthFromNow", elDay1MonthFromNow);
+    elDay1MonthFromNow.click();
+    await elementUpdated(elDay1MonthFromNow);
+
+    expect(parseInt(ada.getAttribute('departDate_year'))).to.equal(dt1MonthFromNow.year);
+    expect(parseInt(ada.getAttribute('departDate_month'))).to.equal(dt1MonthFromNow.month);
+    expect(parseInt(ada.getAttribute('departDate_day'))).to.equal(dt1MonthFromNow.day);
+
+    const elDay6MonthsFromNow = findTargetDay(ada, dt6MonthsFromNow.year, dt6MonthsFromNow.month, dt6MonthsFromNow.day);
+    console.log("elDay6MonthsFromNow", elDay6MonthsFromNow);
+    elDay6MonthsFromNow.click();
+    await elementUpdated(elDay6MonthsFromNow);
+
+    expect(parseInt(ada.getAttribute('returnDate_year'))).to.equal(dt6MonthsFromNow.year);
+    expect(parseInt(ada.getAttribute('returnDate_month'))).to.equal(dt6MonthsFromNow.month);
+    expect(parseInt(ada.getAttribute('returnDate_day'))).to.equal(dt6MonthsFromNow.day);
+  });
+
+  // it('', async () => {
+
+  // });
 
   // it('', async () => {
 
@@ -389,4 +426,16 @@ function findTargetDay(ada, year, month, day) {
       }
     }
   
+}
+
+function expectCorrectDepartDate(ada, year, month, day) {
+  expect(parseInt(ada.getAttribute('departDate_year'))).to.equal(year);
+  expect(parseInt(ada.getAttribute('departDate_month'))).to.equal(month);
+  expect(parseInt(ada.getAttribute('departDate_day'))).to.equal(day);
+}
+
+function expectCorrectReturnDate(ada, year, month, day) {
+  expect(parseInt(ada.getAttribute('returnDate_year'))).to.equal(year);
+  expect(parseInt(ada.getAttribute('returnDate_month'))).to.equal(month);
+  expect(parseInt(ada.getAttribute('returnDate_day'))).to.equal(day);
 }
