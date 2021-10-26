@@ -164,25 +164,33 @@ describe('auro-datepicker-calendar', () => {
       </div>
     `);
 
-    const ada = el.querySelector('auro-datepicker-calendar');
+    const adc = el.querySelector('auro-datepicker-calendar');
 
-    const elDay1MonthFromNow = findTargetDay(ada, dt1MonthFromNow.year, dt1MonthFromNow.month, dt1MonthFromNow.day);
+    const elDay1MonthFromNow = findTargetDay(adc, dt1MonthFromNow.year, dt1MonthFromNow.month, dt1MonthFromNow.day);
     console.log("elDay1MonthFromNow", elDay1MonthFromNow);
     elDay1MonthFromNow.click();
     await elementUpdated(elDay1MonthFromNow);
 
-    expect(parseInt(ada.getAttribute('departDate_year'))).to.equal(dt1MonthFromNow.year);
-    expect(parseInt(ada.getAttribute('departDate_month'))).to.equal(dt1MonthFromNow.month);
-    expect(parseInt(ada.getAttribute('departDate_day'))).to.equal(dt1MonthFromNow.day);
+    expect(parseInt(adc.getAttribute('departDate_year'))).to.equal(dt1MonthFromNow.year);
+    expect(parseInt(adc.getAttribute('departDate_month'))).to.equal(dt1MonthFromNow.month);
+    expect(parseInt(adc.getAttribute('departDate_day'))).to.equal(dt1MonthFromNow.day);
 
-    const elDay6MonthsFromNow = findTargetDay(ada, dt6MonthsFromNow.year, dt6MonthsFromNow.month, dt6MonthsFromNow.day);
+    const elDay6MonthsFromNow = findTargetDay(adc, dt6MonthsFromNow.year, dt6MonthsFromNow.month, dt6MonthsFromNow.day);
     console.log("elDay6MonthsFromNow", elDay6MonthsFromNow);
     elDay6MonthsFromNow.click();
     await elementUpdated(elDay6MonthsFromNow);
 
-    expect(parseInt(ada.getAttribute('departDate_year'))).to.equal(dt6MonthsFromNow.year);
-    expect(parseInt(ada.getAttribute('departDate_month'))).to.equal(dt6MonthsFromNow.month);
-    expect(parseInt(ada.getAttribute('departDate_day'))).to.equal(dt6MonthsFromNow.day);
+    expect(parseInt(adc.getAttribute('departDate_year'))).to.equal(dt6MonthsFromNow.year);
+    expect(parseInt(adc.getAttribute('departDate_month'))).to.equal(dt6MonthsFromNow.month);
+    expect(parseInt(adc.getAttribute('departDate_day'))).to.equal(dt6MonthsFromNow.day);
+
+    // clicking the same date multiple times won't introduce erroneous behavior
+    elDay6MonthsFromNow.click();
+    await elementUpdated(elDay6MonthsFromNow);
+    expectCorrectDepartDate(adc, dt6MonthsFromNow);
+    elDay6MonthsFromNow.click();
+    await elementUpdated(elDay6MonthsFromNow);
+    expectCorrectDepartDate(adc, dt6MonthsFromNow);
   });
 
   // it('', async () => {
@@ -235,7 +243,6 @@ describe('auro-datepicker-calendar', () => {
     expectCorrectReturnDate(adc, dt11MonthsFromNow);
   });
 
-  // in one way mode, clicking the same date multiple times won't introduce erroneous behavior
   // depart date and return date can be the same in round trip mode
   // it('', async () => {
 
