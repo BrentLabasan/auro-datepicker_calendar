@@ -10,6 +10,10 @@ import { DateTime } from 'luxon';
 import AMOUNT_MONTHS_SHOWN from '../src/constants.js';
 
 const dtNow = DateTime.now();
+const dt1MonthFromNow = dtInFuture(1, 0);
+const dt2MonthsFromNow = dtInFuture(2, 0);
+const dt6MonthsFromNow = dtInFuture(6, 0);
+const dt11MonthsFromNow = dtInFuture(11, 0);
 
 function dtInFuture(months, days) {
   return DateTime.now().plus({month: months, day: days});
@@ -96,32 +100,35 @@ describe('auro-datepicker-calendar', () => {
 
   // 💻 DESKTOP 📅📅 ROUND TRIP | setting the depart and return dates
 
-    it('Depart date has NOT been set, so the depart date has been set to today\'s date. Return date is set to one month from depart date.', async () => {
-      const el = await fixture(html`
-        <div>
-          <auro-datepicker-calendar>
-          </auro-datepicker-calendar>
-        </div>
-      `);
-
-      const adc = el.querySelector('auro-datepicker-calendar');
-
-      const date = new Date();
-
-      expect(parseInt(adc.getAttribute('departDate_year'))).to.equal(dtNow.year);
-      expect(parseInt(adc.getAttribute('departDate_month'))).to.equal(dtNow.month); // +1 is because of date is 0 indexed
-      expect(parseInt(adc.getAttribute('departDate_day'))).to.equal(dtNow.day);
-
-      const oneMonthFromToday = dtInFuture(1, 0);
-
-      expect(parseInt(adc.getAttribute('returnDate_year'))).to.equal(oneMonthFromToday.year);
-      expect(parseInt(adc.getAttribute('returnDate_month'))).to.equal(oneMonthFromToday.month);
-      expect(parseInt(adc.getAttribute('returnDate_day'))).to.equal(oneMonthFromToday.day);
-    });
-
-    it('Depart date and return date have been set.', async () => {
+  it('Depart date has NOT been set, so the depart date has been set to today\'s date. Return date is set to one month from depart date.', async () => {
     const el = await fixture(html`
-      <div departDate_year="2021" departDate_month="12" departDate_day="30" returnDate_year="2022" returnDate_month="1" returnDate_day="5">
+      <div>
+        <auro-datepicker-calendar>
+        </auro-datepicker-calendar>
+      </div>
+    `);
+
+    const adc = el.querySelector('auro-datepicker-calendar');
+
+    const date = new Date();
+
+    expect(parseInt(adc.getAttribute('departDate_year'))).to.equal(dtNow.year);
+    expect(parseInt(adc.getAttribute('departDate_month'))).to.equal(dtNow.month); // +1 is because of date is 0 indexed
+    expect(parseInt(adc.getAttribute('departDate_day'))).to.equal(dtNow.day);
+
+    const oneMonthFromToday = dtInFuture(1, 0);
+
+    expect(parseInt(adc.getAttribute('returnDate_year'))).to.equal(oneMonthFromToday.year);
+    expect(parseInt(adc.getAttribute('returnDate_month'))).to.equal(oneMonthFromToday.month);
+    expect(parseInt(adc.getAttribute('returnDate_day'))).to.equal(oneMonthFromToday.day);
+  });
+
+  it('Depart date and return date have been set.', async () => {
+    const departDate = dtInFuture(3, 5);
+    const returnDate = dtInFuture(4, 10);
+
+    const el = await fixture(html`
+      <div departDate_year="${departDate.year}" departDate_month="${departDate.month}" departDate_day="${departDate.day}" returnDate_year="${returnDate.year}" returnDate_month="${returnDate.month}" returnDate_day="${returnDate.day}">
         <auro-datepicker-calendar>
         </auro-datepicker-calendar>
       </div>
@@ -131,58 +138,47 @@ describe('auro-datepicker-calendar', () => {
 
     const date = new Date();
 
-    expect(parseInt(target.getAttribute('departDate_year'))).to.equal(2021);
-    expect(parseInt(target.getAttribute('departDate_month'))).to.equal(12);
-    expect(parseInt(target.getAttribute('departDate_day'))).to.equal(30);
+    expect(parseInt(target.getAttribute('departDate_year'))).to.equal(departDate.year);
+    expect(parseInt(target.getAttribute('departDate_month'))).to.equal(departDate.month);
+    expect(parseInt(target.getAttribute('departDate_day'))).to.equal(departDate.day);
 
-    expect(parseInt(target.getAttribute('returnDate_year'))).to.equal(2022);
-    expect(parseInt(target.getAttribute('returnDate_month'))).to.equal(1);
-    expect(parseInt(target.getAttribute('returnDate_day'))).to.equal(5);
+    expect(parseInt(target.getAttribute('returnDate_year'))).to.equal(returnDate.year);
+    expect(parseInt(target.getAttribute('returnDate_month'))).to.equal(returnDate.month);
+    expect(parseInt(target.getAttribute('returnDate_day'))).to.equal(returnDate.day);
   });
 
   // > clicking the depart and return dates
 
   // 💻 DESKTOP 📅 ONE WAY | clicking the depart and return dates
 
-  // it('clicking a Day in one way mode changes the depart date', async () => {
-  //   const el = await fixture(html`
-  //     <div departDate_year="2030" departDate_month="8" departDate_day="1">
-  //       <auro-datepicker-calendar isOneWay>
-  //       </auro-datepicker-calendar>
-  //     </div>
-  //   `);
+  it('clicking a Day in one way mode changes the depart date', async () => {
+    const el = await fixture(html`
+      <div>
+        <auro-datepicker-calendar isOneWay>
+        </auro-datepicker-calendar>
+      </div>
+    `);
 
-  //   const ada = el.querySelector('auro-datepicker-calendar');
+    const ada = el.querySelector('auro-datepicker-calendar');
 
-  //   expect(parseInt(ada.getAttribute('departDate_year'))).to.equal(2030);
-  //   expect(parseInt(ada.getAttribute('departDate_month'))).to.equal(8); // +1 is because of date is 0 indexed
-  //   expect(parseInt(ada.getAttribute('departDate_day'))).to.equal(1);
+    const elDay1MonthFromNow = findTargetDay(ada, dt1MonthFromNow.year, dt1MonthFromNow.month, dt1MonthFromNow.day);
+    console.log("elDay1MonthFromNow", elDay1MonthFromNow);
+    elDay1MonthFromNow.click();
+    await elementUpdated(elDay1MonthFromNow);
 
-  //   const day1 = findTargetDay(ada, 2030, 8, 1);
-  //   console.log("day1", day1);
-  //   day1.click();
-  //   await elementUpdated(day1);
+    expect(parseInt(ada.getAttribute('departDate_year'))).to.equal(dt1MonthFromNow.year);
+    expect(parseInt(ada.getAttribute('departDate_month'))).to.equal(dt1MonthFromNow.month);
+    expect(parseInt(ada.getAttribute('departDate_day'))).to.equal(dt1MonthFromNow.day);
 
-  //   expect(parseInt(ada.getAttribute('departDate_year'))).to.equal(2030);
-  //   expect(parseInt(ada.getAttribute('departDate_month'))).to.equal(8); // +1 is because of date is 0 indexed
-  //   expect(parseInt(ada.getAttribute('departDate_day'))).to.equal(1);
+    const elDay6MonthsFromNow = findTargetDay(ada, dt6MonthsFromNow.year, dt6MonthsFromNow.month, dt6MonthsFromNow.day);
+    console.log("elDay6MonthsFromNow", elDay6MonthsFromNow);
+    elDay6MonthsFromNow.click();
+    await elementUpdated(elDay6MonthsFromNow);
 
-
-  //   // const date = new Date();
-
-  //   // expect(parseInt(target.getAttribute('departDate_year'))).to.equal(2021);
-  //   // expect(parseInt(target.getAttribute('departDate_month'))).to.equal(12); // +1 is because of date is 0 indexed
-  //   // expect(parseInt(target.getAttribute('departDate_day'))).to.equal(30);
-
-  //   // // console.log("target", target);
-
-  //   // expect(target.hasAttribute('returnDate_year')).to.equal(false);
-  //   // expect(target.hasAttribute('returnDate_month')).to.equal(false);
-  //   // expect(target.hasAttribute('returnDate_day')).to.equal(false);
-
-
-
-  // });
+    expect(parseInt(ada.getAttribute('departDate_year'))).to.equal(dt6MonthsFromNow.year);
+    expect(parseInt(ada.getAttribute('departDate_month'))).to.equal(dt6MonthsFromNow.month);
+    expect(parseInt(ada.getAttribute('departDate_day'))).to.equal(dt6MonthsFromNow.day);
+  });
 
   // it('', async () => {
 

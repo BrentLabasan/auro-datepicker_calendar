@@ -230,7 +230,7 @@ export default class AuroDatePickerCalendar extends LitElement {
         // debugger;
 
         // BOOKMARK
-        if (currentRangeEnd && comesAfter(pendingRangeStart, currentRangeEnd)) { // pending departure date selection comes after the current arival date
+        if (!this.isOneWay && currentRangeEnd && comesAfter(pendingRangeStart, currentRangeEnd)) { // pending departure date selection comes after the current arival date
           alert("pending start date CAN NOT be after current end date");
 
           return;
@@ -283,7 +283,9 @@ export default class AuroDatePickerCalendar extends LitElement {
         }));
       }
 
-      this.isSelectionDepartDate = !this.isSelectionDepartDate;
+      if (!this.isOneWay) {
+        this.isSelectionDepartDate = !this.isSelectionDepartDate;
+      }
     });
 
     // goes through every Day in ADC until it finds the attempted date. If date is valid to be selected, it gets selected

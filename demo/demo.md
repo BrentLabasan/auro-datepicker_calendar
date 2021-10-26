@@ -8,15 +8,15 @@ Depart date has been set.
 <button>tabbable</button>
 
 <div class="exampleWrapper">
-  <!-- <div>
-    <auro-datepicker-calendar isOneWay>
-    </auro-datepicker-calendar>
-  </div> -->
-
-  <div departDate_year="2021" departDate_month="12" departDate_day="30">
+  <div>
     <auro-datepicker-calendar isOneWay>
     </auro-datepicker-calendar>
   </div>
+
+  <!-- <div departDate_year="2021" departDate_month="12" departDate_day="30">
+    <auro-datepicker-calendar isOneWay>
+    </auro-datepicker-calendar>
+  </div> -->
 </div>
 
 <button>tabbable</button>
