@@ -231,17 +231,25 @@ export default class AuroDatePickerCalendar extends LitElement {
 
         // BOOKMARK
         if (!this.isOneWay && currentRangeEnd && comesAfter(pendingRangeStart, currentRangeEnd)) { // pending departure date selection comes after the current arival date
-          alert("pending start date CAN NOT be after current end date");
+          console.log("Pending depart date CAN NOT be after current return date. Setting both depart and return dates to the pending date.");
 
-          return;
+          this.departDate_year = data.detail.year;
+          this.departDate_month = data.detail.month;
+          this.departDate_day = data.detail.day;
+
+          this.returnDate_year = data.detail.year;
+          this.returnDate_month = data.detail.month;
+          this.returnDate_day = data.detail.day;
+        } else {
+          console.log("Pending depart date is before or equal to current return date. Setting only depart date to the pending date.");
+
+          this.departDate_year = data.detail.year;
+          this.departDate_month = data.detail.month;
+          this.departDate_day = data.detail.day;
         }
 
-        // debugger;
 
-        this.departDate_year = data.detail.year;
-        this.departDate_month = data.detail.month;
-        this.departDate_day = data.detail.day;
-
+        // TODO
         this.dispatchEvent(new CustomEvent('changeAttributeGlobally', {
           bubbles: true,
           cancelable: false,

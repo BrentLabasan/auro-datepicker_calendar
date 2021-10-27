@@ -15,6 +15,10 @@ const dt1DayFromNow = dtInFuture(0, 1);
 const dt5DaysFromNow = dtInFuture(0, 5);
 const dt15DaysFromNow = dtInFuture(0, 15);
 const dt25DaysFromNow = dtInFuture(0, 25);
+const dt30DaysFromNow = dtInFuture(0, 30);
+// WARNING: I tried to do a "dt35DaysFromNow" and use it in a test,
+// but when trying to run findTargetDay with dt35DaysFromNow, it doesn't work
+// I don't know right now why this is.
 const dt1MonthFromNow = dtInFuture(1, 0);
 const dt2MonthsFromNow = dtInFuture(2, 0);
 const dt6MonthsFromNow = dtInFuture(6, 0);
@@ -175,7 +179,7 @@ describe('auro-datepicker-calendar', () => {
     const adc = el.querySelector('auro-datepicker-calendar');
 
     const elDay1MonthFromNow = findTargetDay(adc, dt1MonthFromNow.year, dt1MonthFromNow.month, dt1MonthFromNow.day);
-    console.log("elDay1MonthFromNow", elDay1MonthFromNow);
+    // console.log("elDay1MonthFromNow", elDay1MonthFromNow);
     elDay1MonthFromNow.click();
     await elementUpdated(elDay1MonthFromNow);
 
@@ -184,7 +188,6 @@ describe('auro-datepicker-calendar', () => {
     expect(parseInt(adc.getAttribute('departDate_day'))).to.equal(dt1MonthFromNow.day);
 
     const elDay6MonthsFromNow = findTargetDay(adc, dt6MonthsFromNow.year, dt6MonthsFromNow.month, dt6MonthsFromNow.day);
-    console.log("elDay6MonthsFromNow", elDay6MonthsFromNow);
     elDay6MonthsFromNow.click();
     await elementUpdated(elDay6MonthsFromNow);
 
@@ -218,14 +221,12 @@ describe('auro-datepicker-calendar', () => {
     const adc = el.querySelector('auro-datepicker-calendar');
 
     const elDay1MonthFromNow = findTargetDay(adc, dt1MonthFromNow.year, dt1MonthFromNow.month, dt1MonthFromNow.day);
-    console.log("elDay1MonthFromNow", elDay1MonthFromNow);
     elDay1MonthFromNow.click();
     await elementUpdated(elDay1MonthFromNow);
 
     expectCorrectDepartDate(adc, dt1MonthFromNow);
 
     const elDay6MonthsFromNow = findTargetDay(adc, dt6MonthsFromNow.year, dt6MonthsFromNow.month, dt6MonthsFromNow.day);
-    console.log("elDay6MonthsFromNow", elDay6MonthsFromNow);
     elDay6MonthsFromNow.click();
     await elementUpdated(elDay6MonthsFromNow);
 
@@ -233,14 +234,12 @@ describe('auro-datepicker-calendar', () => {
     expectCorrectReturnDate(adc, dt6MonthsFromNow);
 
     const el1DayFromNow = findTargetDay(adc, dt1DayFromNow.year, dt1DayFromNow.month, dt1DayFromNow.day);
-    console.log("el1DayFromNow", el1DayFromNow);
     el1DayFromNow.click();
     await elementUpdated(el1DayFromNow);
     expectCorrectDepartDate(adc, dt1DayFromNow);
     expectCorrectReturnDate(adc, dt6MonthsFromNow);
 
     const el11MonthsFromNow = findTargetDay(adc, dt11MonthsFromNow.year, dt11MonthsFromNow.month, dt11MonthsFromNow.day);
-    console.log("el11MonthsFromNow", el11MonthsFromNow);
     el11MonthsFromNow.click();
     await elementUpdated(el11MonthsFromNow);
     expectCorrectDepartDate(adc, dt1DayFromNow);
@@ -262,7 +261,6 @@ describe('auro-datepicker-calendar', () => {
     const adc = el.querySelector('auro-datepicker-calendar');
 
     const elDay15DaysFromNow = findTargetDay(adc, dt15DaysFromNow.year, dt15DaysFromNow.month, dt15DaysFromNow.day);
-    console.log("elDay15DaysFromNow", elDay15DaysFromNow);
 
     elDay15DaysFromNow.click(); // click to select depart date
     await elementUpdated(elDay15DaysFromNow);
@@ -285,15 +283,55 @@ describe('auro-datepicker-calendar', () => {
     expectCorrectReturnDate(adc, dt15DaysFromNow);
   });
 
-  // todo
-  it('when selecting a depart date, it can\'t be after the current return date', async () => {
+  it('when selecting a depart date that is after the current return date, both depart and return dates will become that date', async () => {
+    const el = await fixture(html`
+      <div 
+        departDate_year="${dt15DaysFromNow.year}" departDate_month="${dt15DaysFromNow.month}" departDate_day="${dt15DaysFromNow.day}"
+        returnDate_year="${dt25DaysFromNow.year}" returnDate_month="${dt25DaysFromNow.month}" returnDate_day="${dt25DaysFromNow.day}"
+      >
+        <auro-datepicker-calendar>
+        </auro-datepicker-calendar>
+      </div>
+    `);
 
+    const adc = el.querySelector('auro-datepicker-calendar');
+
+    const elDay30DaysFromNow = findTargetDay(adc, dt30DaysFromNow.year, dt30DaysFromNow.month, dt30DaysFromNow.day);
+    console.log("elDay35DaysFromNow", elDay30DaysFromNow);
+    elDay30DaysFromNow.click();
+    await elementUpdated(elDay30DaysFromNow);
+
+    expectCorrectDepartDate(adc, dt30DaysFromNow);
+    expectCorrectReturnDate(adc, dt30DaysFromNow);
   });
 
   // todo
-  it('when selecting a return date, it can\'t be before the current depart date', async () => {
+/*   it('when selecting a return date that is before the current depart date, both depart and return dates will become that date', async () => {
+    const el = await fixture(html`
+      <div departDate_year="${dt15DaysFromNow.year}" departDate_month="${dt15DaysFromNow.month}" departDate_day="${dt15DaysFromNow.day}" returnDate_year="${dt25DaysFromNow.year}" returnDate_month="${dt25DaysFromNow.month}" returnDate_day="${dt25DaysFromNow.day}">
+        <auro-datepicker-calendar>
+        </auro-datepicker-calendar>
+      </div>
+    `);
 
-  });
+    const adc = el.querySelector('auro-datepicker-calendar');
+
+    const elDay5DaysFromNow = findTargetDay(adc, dt5DaysFromNow.year, dt5DaysFromNow.month, dt5DaysFromNow.day);
+    console.log("elDay5DaysFromNow", elDay5DaysFromNow);
+    elDay5DaysFromNow.click();
+    await elementUpdated(elDay5DaysFromNow);
+
+    expectCorrectDepartDate(adc, dt5DaysFromNow);
+    expectCorrectReturnDate(adc, dt25DaysFromNow);
+
+    const elDay1DayFromNow = findTargetDay(adc, dt1DayFromNow.year, dt1DayFromNow.month, dt1DayFromNow.day);
+    console.log("elDay1DayFromNow", elDay1DayFromNow);
+    elDay1DayFromNow.click();
+    await elementUpdated(elDay1DayFromNow);
+
+    expectCorrectDepartDate(adc, dt1DayFromNow);
+    expectCorrectReturnDate(adc, dt1DayFromNow);
+  }); */
 
   // TODO can't click a date in the past
 
@@ -477,7 +515,7 @@ describe('auro-datepicker-calendar', () => {
 // retrieves the targetted element in the DOM
 function findTargetDay(ada, year, month, day) {
     const months = ada.shadowRoot.querySelectorAll('auro-datepicker-month');
-    console.log("months", months);
+    // console.log("months", months);
     for (let h = 0; h < months.length; h++) {
       const weeks = months[h].shadowRoot.querySelectorAll('auro-datepicker-week');
       // console.log("weeks", weeks);
