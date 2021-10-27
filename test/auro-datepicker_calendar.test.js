@@ -9,33 +9,7 @@ import { DateTime } from 'luxon';
 
 import AMOUNT_MONTHS_SHOWN from '../src/constants.js';
 
-const dtNow = DateTime.now();
-
-const dt1DayFromNow = dtInFuture(0, 1);
-const dt5DaysFromNow = dtInFuture(0, 5);
-const dt10DaysFromNow = dtInFuture(0, 10);
-const dt15DaysFromNow = dtInFuture(0, 15);
-const dt25DaysFromNow = dtInFuture(0, 25);
-const dt30DaysFromNow = dtInFuture(0, 30);
-// WARNING: I tried to do a "dt35DaysFromNow" and use it in a test,
-// but when trying to run findTargetDay with dt35DaysFromNow, it doesn't work
-// I don't know right now why this is.
-const dt1MonthFromNow = dtInFuture(1, 0);
-const dt2MonthsFromNow = dtInFuture(2, 0);
-const dt6MonthsFromNow = dtInFuture(6, 0);
-const dt11MonthsFromNow = dtInFuture(11, 0);
-
-const dt1DayInPast = dtInPast(0, 1);
-const dt15DaysInPast = dtInPast(0, 15);
-const dt1MonthInPast = dtInPast(1, 0);
-
-function dtInFuture(months, days) {
-  return DateTime.now().plus({month: months, day: days});
-}
-
-function dtInPast(months, days) {
-  return DateTime.now().minus({month: months, day: days});
-}
+import { dtNow, dt1DayFromNow, dt5DaysFromNow, dt10DaysFromNow, dt15DaysFromNow, dt25DaysFromNow, dt30DaysFromNow, dt1MonthFromNow, dt2MonthsFromNow, dt6MonthsFromNow, dt11MonthsFromNow, dt1DayInPast, dt15DaysInPast, dt1MonthInPast } from '../src/constants.js';
 
 describe('auro-datepicker-calendar', () => {
   beforeEach(() => {
