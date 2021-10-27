@@ -100,7 +100,6 @@ export default class AuroDatePickerCalendar extends LitElement {
 
   // To handle when user presses Tab button on btnNextMonth.
   handleKeyDown_btnNextMonth(e) {
-    // alert();
     // console.log(e.code);
     e.preventDefault();
     if (e.code.toLowerCase() ==='tab') {
@@ -188,7 +187,6 @@ export default class AuroDatePickerCalendar extends LitElement {
     // debugger;
 
     this.addEventListener('dayClicked', (data) => {
-      // alert(data);
       console.log(data.detail);
 
       /**
@@ -227,9 +225,6 @@ export default class AuroDatePickerCalendar extends LitElement {
         const pendingRangeStart = DateTime.fromObject(genLuxonObj(data.detail.year, data.detail.month, data.detail.day));
         const currentRangeEnd = DateTime.fromObject(genLuxonObj(this.returnDate_year, this.returnDate_month, this.returnDate_day));
 
-        // debugger;
-
-        // BOOKMARK
         if (!this.isOneWay && currentRangeEnd && comesAfter(pendingRangeStart, currentRangeEnd)) { // pending departure date selection comes after the current arival date
           console.log("Pending depart date CAN NOT be after current return date. Setting both depart and return dates to the pending date.");
 
@@ -241,15 +236,14 @@ export default class AuroDatePickerCalendar extends LitElement {
           this.returnDate_month = data.detail.month;
           this.returnDate_day = data.detail.day;
         } else {
-          console.log("Pending depart date is before or equal to current return date. Setting only depart date to the pending date.");
+          console.log("Pending depart date is before or equal to current return date. Setting depart date to the pending date.");
 
           this.departDate_year = data.detail.year;
           this.departDate_month = data.detail.month;
           this.departDate_day = data.detail.day;
         }
 
-
-        // TODO
+        // TODO x3y is this necessary for the setting of these attributes for ADA?
         this.dispatchEvent(new CustomEvent('changeAttributeGlobally', {
           bubbles: true,
           cancelable: false,
@@ -267,17 +261,24 @@ export default class AuroDatePickerCalendar extends LitElement {
         const currentRangeStart = DateTime.fromObject(genLuxonObj(this.departDate_year, this.departDate_month, this.departDate_day));
 
         if (currentRangeStart && comesBefore(pendingRangeEnd, currentRangeStart)) { // pending departure date selection comes after the current arival date
-          alert("pending end date CAN NOT be before current begin date");
+          console.log("Pending return date CAN NOT be after current depart date. Setting both depart and return dates to the pending date.");
+
+          this.departDate_year = data.detail.year;
+          this.departDate_month = data.detail.month;
+          this.departDate_day = data.detail.day;
+
+          this.returnDate_year = data.detail.year;
+          this.returnDate_month = data.detail.month;
+          this.returnDate_day = data.detail.day;
+        }  else {
+          console.log("Pending return date is after or equal to current depart date. Setting return date to the pending date.");
+
+          this.returnDate_year = data.detail.year;
+          this.returnDate_month = data.detail.month;
+          this.returnDate_day = data.detail.day;
         }
 
-        // if ( 1 === true ) { // pending departure date selection comes after the current arival date
-        //   return false;
-        // }
-
-        this.returnDate_year = data.detail.year;
-        this.returnDate_month = data.detail.month;
-        this.returnDate_day = data.detail.day;
-
+        // TODO x3y is this necessary for the setting of these attributes for ADA?
         this.dispatchEvent(new CustomEvent('changeAttributeGlobally', {
           bubbles: true,
           cancelable: false,

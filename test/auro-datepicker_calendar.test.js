@@ -13,6 +13,7 @@ const dtNow = DateTime.now();
 
 const dt1DayFromNow = dtInFuture(0, 1);
 const dt5DaysFromNow = dtInFuture(0, 5);
+const dt10DaysFromNow = dtInFuture(0, 10);
 const dt15DaysFromNow = dtInFuture(0, 15);
 const dt25DaysFromNow = dtInFuture(0, 25);
 const dt30DaysFromNow = dtInFuture(0, 30);
@@ -252,7 +253,9 @@ describe('auro-datepicker-calendar', () => {
 
   it('depart date and return date can be the same in round trip mode', async () => {
     const el = await fixture(html`
-      <div departDate_year="${dt15DaysFromNow.year}" departDate_month="${dt15DaysFromNow.month}" departDate_day="${dt15DaysFromNow.day}" returnDate_year="${dt25DaysFromNow.year}" returnDate_month="${dt25DaysFromNow.month}" returnDate_day="${dt25DaysFromNow.day}">
+      <div
+        departDate_year="${dt15DaysFromNow.year}" departDate_month="${dt15DaysFromNow.month}" departDate_day="${dt15DaysFromNow.day}"
+        returnDate_year="${dt25DaysFromNow.year}" returnDate_month="${dt25DaysFromNow.month}" returnDate_day="${dt25DaysFromNow.day}">
         <auro-datepicker-calendar>
         </auro-datepicker-calendar>
       </div>
@@ -296,6 +299,7 @@ describe('auro-datepicker-calendar', () => {
 
     const adc = el.querySelector('auro-datepicker-calendar');
 
+    // selecting depart date
     const elDay30DaysFromNow = findTargetDay(adc, dt30DaysFromNow.year, dt30DaysFromNow.month, dt30DaysFromNow.day);
     console.log("elDay35DaysFromNow", elDay30DaysFromNow);
     elDay30DaysFromNow.click();
@@ -306,9 +310,12 @@ describe('auro-datepicker-calendar', () => {
   });
 
   // todo
-/*   it('when selecting a return date that is before the current depart date, both depart and return dates will become that date', async () => {
+   it.only('when selecting a return date that is before the current depart date, both depart and return dates will become that date', async () => {
     const el = await fixture(html`
-      <div departDate_year="${dt15DaysFromNow.year}" departDate_month="${dt15DaysFromNow.month}" departDate_day="${dt15DaysFromNow.day}" returnDate_year="${dt25DaysFromNow.year}" returnDate_month="${dt25DaysFromNow.month}" returnDate_day="${dt25DaysFromNow.day}">
+      <div 
+        departDate_year="${dt15DaysFromNow.year}" departDate_month="${dt15DaysFromNow.month}" departDate_day="${dt15DaysFromNow.day}"
+        returnDate_year="${dt25DaysFromNow.year}" returnDate_month="${dt25DaysFromNow.month}" returnDate_day="${dt25DaysFromNow.day}"
+      >
         <auro-datepicker-calendar>
         </auro-datepicker-calendar>
       </div>
@@ -316,22 +323,21 @@ describe('auro-datepicker-calendar', () => {
 
     const adc = el.querySelector('auro-datepicker-calendar');
 
-    const elDay5DaysFromNow = findTargetDay(adc, dt5DaysFromNow.year, dt5DaysFromNow.month, dt5DaysFromNow.day);
-    console.log("elDay5DaysFromNow", elDay5DaysFromNow);
+    // set depart date
+    // const elDay5DaysFromNow = findTargetDay(adc, dt15DaysFromNow.year, dt15DaysFromNow.month, dt15DaysFromNow.day);
+    const elDay5DaysFromNow = findTargetDay(adc, dt10DaysFromNow.year, dt10DaysFromNow.month, dt10DaysFromNow.day);
+    console.log("elDay5DaysFromNow blah", elDay5DaysFromNow);
     elDay5DaysFromNow.click();
     await elementUpdated(elDay5DaysFromNow);
-
-    expectCorrectDepartDate(adc, dt5DaysFromNow);
-    expectCorrectReturnDate(adc, dt25DaysFromNow);
-
-    const elDay1DayFromNow = findTargetDay(adc, dt1DayFromNow.year, dt1DayFromNow.month, dt1DayFromNow.day);
-    console.log("elDay1DayFromNow", elDay1DayFromNow);
-    elDay1DayFromNow.click();
-    await elementUpdated(elDay1DayFromNow);
+    // set return date
+    const el1DayFromNow = findTargetDay(adc, dt1DayFromNow.year, dt1DayFromNow.month, dt1DayFromNow.day);
+    console.log("el1DayFromNow", el1DayFromNow);
+    el1DayFromNow.click();
+    await elementUpdated(el1DayFromNow);
 
     expectCorrectDepartDate(adc, dt1DayFromNow);
     expectCorrectReturnDate(adc, dt1DayFromNow);
-  }); */
+  });
 
   // TODO can't click a date in the past
 
