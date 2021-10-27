@@ -183,7 +183,7 @@ export default class AuroDatePickerMonth extends LitElement {
               returnDate_year="${this.returnDate_year}"
               returnDate_month="${this.returnDate_month}"
               returnDate_day="${this.returnDate_day}"
-              isOneWay="${this.isOneWay}"
+              ?isOneWay="${this.isOneWay}"
               displayMonthOffset="${this.displayMonthOffset}"
 
               firstDayOfWeekDateTime="${firstSunday}"
@@ -208,7 +208,7 @@ export default class AuroDatePickerMonth extends LitElement {
               returnDate_year="${this.returnDate_year}"
               returnDate_month="${this.returnDate_month}"
               returnDate_day="${this.returnDate_day}"
-              isOneWay="${this.isOneWay}"
+              ?isOneWay="${this.isOneWay}"
               displayMonthOffset="${this.displayMonthOffset}"
  
               firstDayOfWeekDateTime="${DateTime.fromISO(firstSunday).plus({ week: 1 })}"
@@ -234,7 +234,7 @@ export default class AuroDatePickerMonth extends LitElement {
               returnDate_year="${this.returnDate_year}"
               returnDate_month="${this.returnDate_month}"
               returnDate_day="${this.returnDate_day}"
-              isOneWay="${this.isOneWay}"
+              ?isOneWay="${this.isOneWay}"
               displayMonthOffset="${this.displayMonthOffset}"
 
               firstDayOfWeekDateTime="${DateTime.fromISO(firstSunday).plus({ week: 2 })}"
@@ -260,7 +260,7 @@ export default class AuroDatePickerMonth extends LitElement {
               returnDate_year="${this.returnDate_year}"
               returnDate_month="${this.returnDate_month}"
               returnDate_day="${this.returnDate_day}"
-              isOneWay="${this.isOneWay}"
+              ?isOneWay="${this.isOneWay}"
               displayMonthOffset="${this.displayMonthOffset}"
 
               firstDayOfWeekDateTime="${DateTime.fromISO(firstSunday).plus({ week: 3 })}"
@@ -286,7 +286,7 @@ export default class AuroDatePickerMonth extends LitElement {
               returnDate_year="${this.returnDate_year}"
               returnDate_month="${this.returnDate_month}"
               returnDate_day="${this.returnDate_day}"
-              isOneWay="${this.isOneWay}"
+              ?isOneWay="${this.isOneWay}"
               displayMonthOffset="${this.displayMonthOffset}"
             
               firstDayOfWeekDateTime="${DateTime.fromISO(firstSunday).plus({ week: 4 })}"
@@ -312,7 +312,7 @@ export default class AuroDatePickerMonth extends LitElement {
               returnDate_year="${this.returnDate_year}"
               returnDate_month="${this.returnDate_month}"
               returnDate_day="${this.returnDate_day}"
-              isOneWay="${this.isOneWay}"
+              ?isOneWay="${this.isOneWay}"
               displayMonthOffset="${this.displayMonthOffset}"
             
               firstDayOfWeekDateTime="${DateTime.fromISO(firstSunday).plus({ week: 5 })}"
@@ -339,7 +339,7 @@ export default class AuroDatePickerMonth extends LitElement {
                 returnDate_year="${this.returnDate_year}"
                 returnDate_month="${this.returnDate_month}"
                 returnDate_day="${this.returnDate_day}"
-                isOneWay="${this.isOneWay}"
+                ?isOneWay="${this.isOneWay}"
                 displayMonthOffset="${this.displayMonthOffset}"
               
                 firstDayOfWeekDateTime="${DateTime.fromISO(firstSunday).plus({ week: 6 })}"
@@ -366,7 +366,7 @@ export default class AuroDatePickerMonth extends LitElement {
               returnDate_year="${this.returnDate_year}"
               returnDate_month="${this.returnDate_month}"
               returnDate_day="${this.returnDate_day}"
-              isOneWay="${this.isOneWay}"
+              ?isOneWay="${this.isOneWay}"
               displayMonthOffset="${this.displayMonthOffset}"
 
               firstDayOfWeekDateTime="${DateTime.fromISO(firstSunday).plus({ week: 7 })}"

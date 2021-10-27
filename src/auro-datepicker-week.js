@@ -115,7 +115,7 @@ export default class AuroDatePickerWeek extends LitElement {
 
         <!-- bookmark: compare to monthThatGeneratedThisDay, and if false, generate blank div-->
           <auro-datepicker-day
-            isOneWay="${this.isOneWay}"
+            ?isOneWay="${this.isOneWay}"
             displayMonthOffset="${this.displayMonthOffset}"
           
             ?isRangeStart="${firstSunday.plus({ days: 0 }).toISO() === isoRangeStart}"
@@ -142,7 +142,7 @@ export default class AuroDatePickerWeek extends LitElement {
           </auro-datepicker-day>
 
           <auro-datepicker-day
-            isOneWay="${this.isOneWay}"
+            ?isOneWay="${this.isOneWay}"
             displayMonthOffset="${this.displayMonthOffset}"
           
             ?isRangeStart="${firstSunday.plus({ days: 1 }).toISO() === isoRangeStart}"
@@ -169,7 +169,7 @@ export default class AuroDatePickerWeek extends LitElement {
           </auro-datepicker-day>
           
           <auro-datepicker-day
-            isOneWay="${this.isOneWay}"
+            ?isOneWay="${this.isOneWay}"
             displayMonthOffset="${this.displayMonthOffset}"
 
             ?isRangeStart="${firstSunday.plus({ days: 2 }).toISO() === isoRangeStart}"
@@ -196,7 +196,7 @@ export default class AuroDatePickerWeek extends LitElement {
           </auro-datepicker-day>
 
           <auro-datepicker-day
-            isOneWay="${this.isOneWay}"
+            ?isOneWay="${this.isOneWay}"
             displayMonthOffset="${this.displayMonthOffset}"
 
             ?isRangeStart="${firstSunday.plus({ days: 3 }).toISO() === isoRangeStart}"
@@ -223,7 +223,7 @@ export default class AuroDatePickerWeek extends LitElement {
           </auro-datepicker-day>
 
           <auro-datepicker-day
-            isOneWay="${this.isOneWay}"
+            ?isOneWay="${this.isOneWay}"
             displayMonthOffset="${this.displayMonthOffset}"
 
             ?isRangeStart="${firstSunday.plus({ days: 4 }).toISO() === isoRangeStart}"
@@ -250,7 +250,7 @@ export default class AuroDatePickerWeek extends LitElement {
           </auro-datepicker-day>
 
           <auro-datepicker-day
-            isOneWay="${this.isOneWay}"
+            ?isOneWay="${this.isOneWay}"
             displayMonthOffset="${this.displayMonthOffset}"
 
             ?isRangeStart="${firstSunday.plus({ days: 5 }).toISO() === isoRangeStart}"
@@ -277,7 +277,7 @@ export default class AuroDatePickerWeek extends LitElement {
           </auro-datepicker-day>
 
           <auro-datepicker-day
-            isOneWay="${this.isOneWay}"
+            ?isOneWay="${this.isOneWay}"
             displayMonthOffset="${this.displayMonthOffset}"
 
             ?isRangeStart="${firstSunday.plus({ days: 6 }).toISO() === isoRangeStart}"

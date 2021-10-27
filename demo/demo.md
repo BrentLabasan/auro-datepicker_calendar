@@ -8,10 +8,10 @@ Depart date has been set.
 <button>tabbable</button>
 
 <div class="exampleWrapper">
-  <div>
+  <!-- <div>
     <auro-datepicker-calendar isOneWay>
     </auro-datepicker-calendar>
-  </div>
+  </div> -->
 
   <!-- <div departDate_year="2021" departDate_month="12" departDate_day="30">
     <auro-datepicker-calendar isOneWay>
@@ -30,12 +30,17 @@ If depart date is not set by user, depart date will automatically be set to toda
 <button>tabbable</button>
 
 <div class="exampleWrapper">
-  <!-- <div>
-    <auro-datepicker-calendar departDate_year="2021" departDate_month="10" departDate_day="30" returnDate_year="2021" returnDate_month="7" returnDate_day="27">
+  <div>
+    <auro-datepicker-calendar>
+    </auro-datepicker-calendar>
+  </div>
+
+  <!-- <div departDate_year="2021" departDate_month="10" departDate_day="30" returnDate_year="2021" returnDate_month="12" returnDate_day="5">
+    <auro-datepicker-calendar>
     </auro-datepicker-calendar>
   </div> -->
 
-  <!-- <div>
+  <!-- <div departDate_year="2021" departDate_month="11" departDate_day="15" returnDate_year="2021" returnDate_month="11" returnDate_day="30">
     <auro-datepicker-calendar>
     </auro-datepicker-calendar>
   </div> -->

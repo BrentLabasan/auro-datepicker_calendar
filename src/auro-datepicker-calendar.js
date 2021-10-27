@@ -189,27 +189,14 @@ export default class AuroDatePickerCalendar extends LitElement {
     this.addEventListener('dayClicked', (data) => {
       console.log(data.detail);
 
-      /**
-       *
-       */
       function genLuxonObj(year, month, day) {
-        return {
-          year,
-          month,
-          day,
-        };
+        return { year, month, day };
       }
 
-      /**
-       *
-       */
       function comesBefore(a, b) {
         return DateTime.fromISO(a) < DateTime.fromISO(b);
       }
 
-      /**
-       *
-       */
       function comesAfter(a, b) {
         return DateTime.fromISO(a) > DateTime.fromISO(b);
       }
@@ -573,7 +560,7 @@ export default class AuroDatePickerCalendar extends LitElement {
             returnDate_year="${this.returnDate_year}"
             returnDate_month="${this.returnDate_month}"
             returnDate_day="${this.returnDate_day}"
-            isOneWay="${this.isOneWay}"
+            ?isOneWay="${this.isOneWay}"
 
             displayMonthOffset="${this.displayMonthOffset}"
 
